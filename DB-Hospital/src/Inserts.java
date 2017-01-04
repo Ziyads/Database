@@ -1,22 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
-public class Insert extends JFrame {
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+public class Inserts extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
 	/**
 	 * Launch the application.
 	 */
@@ -24,7 +23,7 @@ public class Insert extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Insert frame = new Insert();
+					Inserts frame = new Inserts();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +35,7 @@ public class Insert extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Insert() {
+	public Inserts() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -45,7 +44,7 @@ public class Insert extends JFrame {
 		contentPane.setLayout(null);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(152, 6, 130, 27);
+		comboBox.setBounds(111, 6, 231, 42);
 		contentPane.add(comboBox);
 		
 		String[] petStrings = { "Branch", "Department", "Doctor", "Paitient", "Appointment" };
@@ -60,28 +59,7 @@ public class Insert extends JFrame {
 				System.out.println(e.getSource());
 				switch(e.getActionCommand()){
 					case "Branch":
-						textField = new JTextField();
-						textField.setBounds(30, 117, 130, 26);
-						contentPane.add(textField);
-						textField.setColumns(10);
-						
-						textField_1 = new JTextField();
-						textField_1.setBounds(271, 117, 130, 26);
-						contentPane.add(textField_1);
-						textField_1.setColumns(10);
-						
-						JLabel lblNewLabel = new JLabel("Branch Number");
-						lblNewLabel.setBounds(286, 78, 103, 16);
-						contentPane.add(lblNewLabel);
-						
-						JLabel lblNewLabel_1 = new JLabel("City");
-						lblNewLabel_1.setToolTipText("City");
-						lblNewLabel_1.setBounds(74, 78, 101, 16);
-						contentPane.add(lblNewLabel_1);
-						
-						JButton btnInsert = new JButton("Insert");
-						btnInsert.setBounds(165, 243, 117, 29);
-						contentPane.add(btnInsert);
+					
 						break;
 					case "Department":
 						
@@ -91,7 +69,29 @@ public class Insert extends JFrame {
 				
 			}
 		});
+		textField = new JTextField();
+		textField.setBounds(30, 117, 130, 26);
+		contentPane.add(textField);
+		textField.setColumns(10);
 		
+		textField_1 = new JTextField();
+		textField_1.setBounds(271, 117, 130, 26);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Branch Number");
+		lblNewLabel.setBounds(286, 78, 103, 16);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("City");
+		lblNewLabel_1.setToolTipText("City");
+		lblNewLabel_1.setBounds(74, 78, 101, 16);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.setBounds(165, 243, 117, 29);
+		contentPane.add(btnInsert);
 		
 	}
+
 }
