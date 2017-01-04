@@ -59,7 +59,28 @@ public class Inserts extends JFrame {
 				System.out.println(e.getSource());
 				switch(e.getActionCommand()){
 					case "Branch":
-					
+						textField = new JTextField();
+						textField.setBounds(30, 117, 130, 26);
+						contentPane.add(textField);
+						textField.setColumns(10);
+						
+						textField_1 = new JTextField();
+						textField_1.setBounds(271, 117, 130, 26);
+						contentPane.add(textField_1);
+						textField_1.setColumns(10);
+						
+						JLabel lblNewLabel = new JLabel("Branch Number");
+						lblNewLabel.setBounds(286, 78, 103, 16);
+						contentPane.add(lblNewLabel);
+						
+						JLabel lblNewLabel_1 = new JLabel("City");
+						lblNewLabel_1.setToolTipText("City");
+						lblNewLabel_1.setBounds(74, 78, 101, 16);
+						contentPane.add(lblNewLabel_1);
+						
+						JButton btnInsert = new JButton("Insert");
+						btnInsert.setBounds(165, 243, 117, 29);
+						contentPane.add(btnInsert);
 						break;
 					case "Department":
 						
@@ -69,28 +90,6 @@ public class Inserts extends JFrame {
 				
 			}
 		});
-		textField = new JTextField();
-		textField.setBounds(30, 117, 130, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(271, 117, 130, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Branch Number");
-		lblNewLabel.setBounds(286, 78, 103, 16);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("City");
-		lblNewLabel_1.setToolTipText("City");
-		lblNewLabel_1.setBounds(74, 78, 101, 16);
-		contentPane.add(lblNewLabel_1);
-		
-		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(165, 243, 117, 29);
-		contentPane.add(btnInsert);
 		
 	}
 
