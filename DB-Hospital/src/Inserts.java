@@ -85,6 +85,16 @@ public class Inserts extends JFrame {
 					case "Department":
 						
 						break;
+					case "Doctor":
+						
+						break;
+					case "Paitient":
+						
+						break;
+					case "Appointment":
+					
+						break;
+					
 						
 				}
 				
