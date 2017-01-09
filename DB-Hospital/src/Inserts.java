@@ -59,8 +59,9 @@ public class Inserts extends JFrame {
 		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(e.getSource());
-				switch(e.getActionCommand()){
+				String s=e.getSource().toString().substring(277);
+				String z=s.substring(0, s.length()-1);
+				switch(z){
 					case "Branch":
 						
 						textField = new JTextField();
