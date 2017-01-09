@@ -16,6 +16,8 @@ public class Inserts extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 	/**
 	 * Launch the application.
 	 */
@@ -54,11 +56,13 @@ public class Inserts extends JFrame {
 		comboBox.addItem(petStrings[3]);
 		comboBox.addItem(petStrings[4]);
 		
+		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(e.getSource());
 				switch(e.getActionCommand()){
 					case "Branch":
+						
 						textField = new JTextField();
 						textField.setBounds(30, 117, 130, 26);
 						contentPane.add(textField);
@@ -81,18 +85,40 @@ public class Inserts extends JFrame {
 						JButton btnInsert = new JButton("Insert");
 						btnInsert.setBounds(165, 243, 117, 29);
 						contentPane.add(btnInsert);
+						
 						break;
 					case "Department":
+						
+						JLabel lblDepartmentNumber = new JLabel("Department number");
+						lblDepartmentNumber.setBounds(20, 125, 141, 16);
+						contentPane.add(lblDepartmentNumber);
+						
+						textField_2 = new JTextField();
+						textField_2.setBounds(170, 67, 130, 26);
+						contentPane.add(textField_2);
+						textField_2.setColumns(10);
+						
+						JLabel lblDepartmentName = new JLabel("Department name");
+						lblDepartmentName.setBounds(20, 72, 141, 16);
+						contentPane.add(lblDepartmentName);
+						
+						textField_3 = new JTextField();
+						textField_3.setBounds(170, 120, 130, 26);
+						contentPane.add(textField_3);
+						textField_3.setColumns(10);
 						
 						break;
 					case "Doctor":
 						
+						
 						break;
 					case "Paitient":
+						
 						
 						break;
 					case "Appointment":
 					
+						
 						break;
 					
 						
@@ -102,5 +128,4 @@ public class Inserts extends JFrame {
 		});
 		
 	}
-
 }
