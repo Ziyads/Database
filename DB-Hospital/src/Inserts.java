@@ -56,6 +56,34 @@ public class Inserts extends JFrame {
 		comboBox.addItem(petStrings[3]);
 		comboBox.addItem(petStrings[4]);
 		
+		/* Branch */
+		textField = new JTextField();
+		textField.setBounds(30, 117, 130, 26);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		textField.hide();
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(271, 117, 130, 26);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		textField_1.hide();
+		
+		JLabel lblNewLabel = new JLabel("Branch Number");
+		lblNewLabel.setBounds(286, 78, 103, 16);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.hide();
+		
+		JLabel lblNewLabel_1 = new JLabel("City");
+		lblNewLabel_1.setToolTipText("City");
+		lblNewLabel_1.setBounds(74, 78, 101, 16);
+		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.hide();
+		
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.setBounds(165, 243, 117, 29);
+		contentPane.add(btnInsert);
+		btnInsert.hide();
 		
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,11 +91,17 @@ public class Inserts extends JFrame {
 				String z=s.substring(0, s.length()-1);
 				switch(z){
 					case "Branch":
-						
+						textField.show();
+						textField_1.show();
+						lblNewLabel.show();
+						lblNewLabel_1.show();
+						btnInsert.show();
+						/*
 						textField = new JTextField();
 						textField.setBounds(30, 117, 130, 26);
 						contentPane.add(textField);
 						textField.setColumns(10);
+						
 						
 						textField_1 = new JTextField();
 						textField_1.setBounds(271, 117, 130, 26);
@@ -86,6 +120,7 @@ public class Inserts extends JFrame {
 						JButton btnInsert = new JButton("Insert");
 						btnInsert.setBounds(165, 243, 117, 29);
 						contentPane.add(btnInsert);
+						*/
 						
 						break;
 					case "Department":
