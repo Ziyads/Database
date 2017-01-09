@@ -137,7 +137,7 @@ class appointment{
 	private String date;
 	private double price;
 	
-	public appointment(int ssn,int Pid,int Appno,int time,int date,double price){
+	public appointment(int ssn,int Pid,int Appno,String time,String date,double price){
 		this.ssn=ssn;
 		this.Pid=Pid;
 		this.Appno=Appno;
