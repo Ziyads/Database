@@ -84,7 +84,77 @@ public class Inserts extends JFrame {
 		btnInsert.setBounds(165, 243, 117, 29);
 		contentPane.add(btnInsert);
 		btnInsert.hide();
-		
+		JLabel lblNewLabel_3 = new JLabel("Paitient_ID");
+		lblNewLabel_3.setBounds(20, 52, 80, 16);
+		contentPane.add(lblNewLabel_3);
+		JLabel lblDoctorssn = new JLabel("Doctor_SSN");
+		lblDoctorssn.setBounds(20, 85, 80, 16);
+		contentPane.add(lblDoctorssn);
+		JComboBox comboBox_ID = new JComboBox();
+		comboBox_ID.setBounds(138, 48, 119, 27);
+		contentPane.add(comboBox_ID);
+		JComboBox comboBox_SSN = new JComboBox();
+		comboBox_SSN.setBounds(138, 81, 119, 27);
+		contentPane.add(comboBox_SSN);
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setBounds(20, 120, 80, 16);
+		contentPane.add(lblDate);
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setBounds(159, 120, 45, 16);
+		contentPane.add(lblYear);
+		JLabel lblMonth = new JLabel("Month");
+		lblMonth.setBounds(262, 120, 80, 16);
+		contentPane.add(lblMonth);
+		JLabel lblDay = new JLabel("Day");
+		lblDay.setBounds(364, 120, 80, 16);
+		contentPane.add(lblDay);
+		JComboBox comboBox_Y = new JComboBox();
+		comboBox_Y.setBounds(138, 142, 99, 27);
+		contentPane.add(comboBox_Y);
+		int year[] = { 2016, 2017, 2018, 2019, 2020 };
+		comboBox_Y.addItem(year[0]);
+		comboBox_Y.addItem(year[1]);
+		comboBox_Y.addItem(year[2]);
+		comboBox_Y.addItem(year[3]);
+		comboBox_Y.addItem(year[4]);
+		JComboBox comboBox_M = new JComboBox();
+		comboBox_M.setBounds(243, 142, 95, 27);
+		contentPane.add(comboBox_M);
+		int month[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+		for (int i = 0; i < month.length; i++)
+			comboBox_M.addItem(month[i]);
+		JComboBox comboBox_D = new JComboBox();
+		comboBox_D.setBounds(347, 142, 80, 27);
+		contentPane.add(comboBox_D);
+		int day[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+				25, 26, 27, 28, 29, 30, 31 };
+		for (int i = 0; i < day.length; i++)
+			comboBox_D.addItem(day[i]);
+		JLabel lblTime = new JLabel("Time");
+		lblTime.setBounds(20, 186, 80, 16);
+		contentPane.add(lblTime);
+		JLabel lblHours = new JLabel("Hours");
+		lblHours.setBounds(159, 186, 45, 16);
+		contentPane.add(lblHours);
+		JLabel lblHours_1 = new JLabel("Minutes");
+		lblHours_1.setBounds(262, 186, 80, 16);
+		contentPane.add(lblHours_1);
+		JComboBox comboBox_H = new JComboBox();
+		comboBox_H.setBounds(142, 207, 95, 27);
+		contentPane.add(comboBox_H);
+		int hour[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+				00 };
+		for (int i = 0; i < hour.length; i++)
+			comboBox_H.addItem(hour[i]);
+		JComboBox comboBox_Min = new JComboBox();
+		comboBox_Min.setBounds(243, 207, 91, 27);
+		contentPane.add(comboBox_Min);
+		int min[] = { 0, 10, 20, 30, 40, 50 };
+		for (int i = 0; i < min.length; i++)
+			comboBox_Min.addItem(min[i]);
+		JButton btnInsert_2 = new JButton("Insert");
+		btnInsert_2.setBounds(163, 246, 117, 29);
+		contentPane.add(btnInsert_2);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s=e.getSource().toString().substring(277);
@@ -124,15 +194,16 @@ public class Inserts extends JFrame {
 						
 						break;
 					case "Department":
-						
+						/*
 						JLabel lblDepartmentNumber = new JLabel("Department number");
 						lblDepartmentNumber.setBounds(20, 125, 141, 16);
 						contentPane.add(lblDepartmentNumber);
+						lblDepartmentNumber.show();
 						
-						textField_2 = new JTextField();
-						textField_2.setBounds(170, 67, 130, 26);
-						contentPane.add(textField_2);
-						textField_2.setColumns(10);
+						JTextField depnum = new JTextField();
+						depnum.setBounds(170, 67, 130, 26);
+						contentPane.add(depnum);
+						depnum.setColumns(10);
 						
 						JLabel lblDepartmentName = new JLabel("Department name");
 						lblDepartmentName.setBounds(20, 72, 141, 16);
@@ -142,7 +213,7 @@ public class Inserts extends JFrame {
 						textField_3.setBounds(170, 120, 130, 26);
 						contentPane.add(textField_3);
 						textField_3.setColumns(10);
-						
+						*/
 						break;
 					case "Doctor":
 						

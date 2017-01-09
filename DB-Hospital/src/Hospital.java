@@ -133,8 +133,8 @@ class appointment{
 
 	private int Pid;
 	private int Appno;
-	private int time;
-	private int date;
+	private String time;
+	private String date;
 	private double price;
 	
 	public appointment(int ssn,int Pid,int Appno,int time,int date,double price){
@@ -154,10 +154,10 @@ class appointment{
 	public int getAppno() {
 		return Appno;
 	}
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
-	public int getDate() {
+	public String getDate() {
 		return date;
 	}
 	public double getPrice() {
