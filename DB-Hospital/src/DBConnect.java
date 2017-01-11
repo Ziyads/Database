@@ -151,7 +151,18 @@ public class DBConnect {
 				return true;
 			case "Appointment":
 				Appointment a=(Appointment)o;
-				
+				try{
+					 
+					String query ="INSERT INTO `Hospital`.`Appointment` (`DSSN`, `Pid`, `Appno`, `time`, `date`, `price`) VALUES "
+									+ "('"+a.getSsn()+"', '"+a.getPid()+"', '"+a.getAppno()+"', '"+a.getTime()+"', '"+a.getDate()+"', '"+a.getPrice()+"');";
+			        
+					st.executeUpdate(query);
+
+			    }catch(Exception ex){
+			    	System.out.println("Error :"+ ex);
+			    	return false;
+			    	
+			    }
 				return true;
 			default:
 				System.out.println("Error unknown kind");
