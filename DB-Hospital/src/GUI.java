@@ -7,7 +7,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
-
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -48,6 +49,7 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		DBConnect DBC=new DBConnect();
 		
 		
 		DefaultTableModel model = new DefaultTableModel();
@@ -59,8 +61,7 @@ public class GUI extends JFrame {
 		table = new JTable(model);
 		table.setBounds(21, 6, 403, 190);
 		contentPane.add(table);
-		DefaultTableModel modelz = (DefaultTableModel) table.getModel();
-        modelz.addRow(new Object[]{"Bnumber", "Hid", "Location","",""});
+		
 		
 		
 		JComboBox comboBox = new JComboBox();
@@ -81,28 +82,72 @@ public class GUI extends JFrame {
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String z=comboBox.getSelectedItem().toString();
-				DBConnect DBC=new DBConnect();
+				
 			
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				model.setRowCount(0);
+				
 				switch(z){
 					case "Branch":
-						String s[][]=DBC.getData("Branch");
-				        DefaultTableModel modelf = (DefaultTableModel) table.getModel();
-				        for(int i=0;i<s.length;i++)
-				        	modelf.addRow(new Object[]{""+s[i][0]+"", ""+s[i][1]+"", ""+s[i][2]+"","",""});
+						
+						
+						DefaultTableModel bM = (DefaultTableModel) table.getModel();
+				        bM.addRow(new Object[]{"Bnumber", "Hid", "Location","",""});
+						
+						String arrB[][]=DBC.getData("Branch");
+				        DefaultTableModel m_b = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<arrB.length;i++)
+				        	m_b.addRow(new Object[]{""+arrB[i][0]+"", ""+arrB[i][1]+"", ""+arrB[i][2]+""});
 						
 						  
 						break;
 					case "Department":
 						
+						
+						DefaultTableModel depM = (DefaultTableModel) table.getModel();
+						depM.addRow(new Object[]{"Dnumber","Dname","Bnumber","Hid"});
+						
+						String arrDp[][]=DBC.getData("Department");
+				        DefaultTableModel m_dep = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<arrDp.length;i++)
+				        	m_dep.addRow(new Object[]{""+arrDp[i][0]+"", ""+arrDp[i][1]+"", ""+arrDp[i][2]+"",""+arrDp[i][3]+""});
+				        
 						break;
 					case "Doctor":
 						
+						
+						DefaultTableModel docM = (DefaultTableModel) table.getModel();
+						docM.addRow(new Object[]{"SSN","Fname","Lname","Sex","Dnumber"});
+						
+						String arrD[][]=DBC.getData("Doctor");
+				        DefaultTableModel m_doc = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<arrD.length;i++)
+				        	m_doc.addRow(new Object[]{""+arrD[i][0]+"", ""+arrD[i][1]+"", ""+arrD[i][2]+"",""+arrD[i][3]+"",""+arrD[i][4]+""});
+				        
 						break;
 					case "Paitient":
 						
+						
+						DefaultTableModel paM = (DefaultTableModel) table.getModel();
+						paM.addRow(new Object[]{"Pid","Fname","Lname","Sex","SSN"});
+						
+						String arrP[][]=DBC.getData("Paitient");
+				        DefaultTableModel m_p = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<arrP.length;i++)
+				        	m_p.addRow(new Object[]{""+arrP[i][0]+"", ""+arrP[i][1]+"", ""+arrP[i][2]+"",""+arrP[i][3]+"",""+arrP[i][4]+""});
+				        
 						break;
 					case "Appointment":
 						
+						
+						DefaultTableModel aponM = (DefaultTableModel) table.getModel();
+						aponM.addRow(new Object[]{"DSSN","Pid","Appno.","time","date","price"});
+						
+						String arrAp[][]=DBC.getData("Appointment");
+				        DefaultTableModel m_ap = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<arrAp.length;i++)
+				        	m_ap.addRow(new Object[]{""+arrAp[i][0]+"", ""+arrAp[i][1]+"", ""+arrAp[i][2]+"",""+arrAp[i][3]+"",""+arrAp[i][4]+"", ""+arrAp[i][5]+""});
+				        
 						break;
 					default:
 						System.out.println("*");
@@ -143,6 +188,58 @@ public class GUI extends JFrame {
 		contentPane.add(jb_delete);
 		jb_delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				int si=table.getSelectedRow();
+				if(si == -1){
+					
+				}
+				String z=comboBox.getSelectedItem().toString();
+				
+				switch(z){
+					case "Branch":
+						String Bnumber=table.getValueAt(si, 0).toString();
+						int bnum=Integer.parseInt(Bnumber);
+						String Hid=table.getValueAt(si, 1).toString();
+						int id=Integer.parseInt(Hid);
+						String Location=table.getValueAt(si, 2).toString();
+						
+						Branch b=new Branch(bnum,id,Location);
+						DBC.delete("Branch",b);
+						
+						
+						break;
+					case "Department":
+						
+						String Dnumber=table.getValueAt(si, 0).toString();
+						int dnum=Integer.parseInt(Dnumber);
+						
+						String Dname=table.getValueAt(si, 1).toString();
+						
+						String Bnum=table.getValueAt(si, 2).toString();
+						int bn=Integer.parseInt(Bnum);
+						
+						String Shid2=table.getValueAt(si, 3).toString();
+						int hid2=Integer.parseInt(Shid2);
+						
+						Department dep=new Department(dnum,Dname,bn,hid2);
+						DBC.delete("Department",dep);
+						
+						
+						break;
+					case "Doctor":
+						
+						break;
+					case "Paitient":
+						
+						
+						break;
+					case "Appointment":
+						
+						
+						
+						break;
+					default:
+						System.out.println("*");
+				}
 				
 			}
 		});

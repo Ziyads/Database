@@ -24,7 +24,7 @@ public class Inserts {
 	private JPanel paitientP;
 	private JPanel appoinP;
 	
-	private int hid=999999;
+	private int hid=3;
 	//private JComboBox comboBox;
 
 	public static void main(String[] args) {
@@ -110,13 +110,16 @@ public class Inserts {
 		branchP.add(btnInsert);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String bn=tf_bn.getText();
+				String bn=tf_bc.getText();
 				int bnum=Integer.parseInt(bn);
 				
-				String loc=tf_bc.getText();
+				String loc=tf_bn.getText();
 				
-				Branch brO=new Branch(bnum,0,loc);
+				Branch brO=new Branch(bnum,hid,loc);
 				boolean flag=DBC.insert("Branch",brO);
+				if(flag){
+				  f1.hide();
+				}
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
@@ -187,7 +190,7 @@ public class Inserts {
 				String dn=jt_dnm.getText();
 				int dnum=Integer.parseInt(dn);
 				
-				String depN=jt_dnm.getText();
+				String depN=jt_dn.getText();
 				
 				int bnum=arrBn[bnums.getSelectedIndex()];
 				Department depO=new Department(dnum,depN,bnum,hid);
