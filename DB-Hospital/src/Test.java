@@ -14,11 +14,11 @@ public class Test {
             switch(in){
             	case "0": System.out.println("Bye, Come Back Agin :)");
             		break;
-            	case "1":connect.insert();
+            	case "1"://connect.insert();
             		break;
-            	case "2":connect.delete();
+            	case "2"://connect.delete();
             		break;
-            	case "3":connect.search();
+            	case "3"://connect.search();
             		break;
             	default : System.out.println("Plese enter your input again:");	
             }

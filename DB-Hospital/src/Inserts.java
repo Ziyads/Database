@@ -53,7 +53,7 @@ public class Inserts {
 		f5.hide();
 	}
 	private void magic(){
-		
+		DBConnect DBC=new DBConnect();
 		
 		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
@@ -104,6 +104,17 @@ public class Inserts {
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(165, 243, 117, 29);
 		branchP.add(btnInsert);
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String bn=tf_bn.getText();
+				int bnum=Integer.parseInt(bn);
+				
+				String loc=tf_bc.getText();
+				
+				Branch brO=new Branch(bnum,0,loc);
+				boolean flag=DBC.insert("Branch",brO);
+			}
+		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		

@@ -31,7 +31,7 @@ class Branch{
 	public int getBnumber(){
 		return Bnumber;
 	}
-	public int Hid(){
+	public int getHid(){
 		return Hid;
 	}
 	public String getLocation(){
@@ -51,16 +51,16 @@ class Department{
 		this.Bnumber=Bnumber;
 		this.Hid=Hid;
 	}
-	public int Dnumber(){
+	public int getDnumber(){
 		return Dnumber;
 	}
-	public String Dname(){
+	public String getDname(){
 		return Dname;
 	}
 	public int getBnumber(){
 		return Bnumber;
 	}
-	public int Hid(){
+	public int getHid(){
 		return Hid;
 	}
 }
@@ -91,7 +91,7 @@ class Doctor{
 	public String getSex(){
 		return sex;
 	}
-	public int Dnumber(){
+	public int getDnumber(){
 		return Dnumber;
 	}
 }
@@ -128,7 +128,7 @@ class Paitient{
 	
 }	
 //*******************************************************************
-class appointment{
+class Appointment{
 	private int ssn;
 
 	private int Pid;
@@ -137,7 +137,7 @@ class appointment{
 	private String date;
 	private double price;
 	
-	public appointment(int ssn,int Pid,int Appno,String time,String date,double price){
+	public Appointment(int ssn,int Pid,int Appno,String time,String date,double price){
 		this.ssn=ssn;
 		this.Pid=Pid;
 		this.Appno=Appno;

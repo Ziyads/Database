@@ -85,6 +85,81 @@ public class DBConnect {
 		
 	}
 	
+	public boolean insert(String kind,Object o){
+		switch(kind){
+			case "Branch":
+				Branch b=(Branch)o;
+				try{
+			 
+					String query ="INSERT INTO `Hospital`.`Branch` (`Bnumber`, `Hid`, `Location`) VALUES "
+									+ "('"+b.getBnumber()+"', '"+b.getHid()+"', '"+b.getLocation()+"');";
+			        
+					st.executeUpdate(query);
+
+			    }catch(Exception ex){
+			    	System.out.println("Error :"+ ex);
+			    	return false;
+			    	
+			    }
+				return true;
+			
+			case "Department":
+				Department dep=(Department)o;
+				try{
+					 
+					String query ="INSERT INTO `Hospital`.`Department` (`Dnumber`, `Dname`, `Bnumber`, `Hid`) VALUES "
+									+ "('"+dep.getDnumber()+"', '"+dep.getDname()+"', '"+dep.getBnumber()+"', '"+dep.getHid()+"');";
+			        
+					st.executeUpdate(query);
+
+			    }catch(Exception ex){
+			    	System.out.println("Error :"+ ex);
+			    	return false;
+			    	
+			    }
+				return true;
+			
+			case "Doctor":
+				Doctor doc=(Doctor)o;
+				try{
+					 
+					String query ="INSERT INTO `Hospital`.`Doctor` (`SSN`, `Fname`, `Lname`, `Sex`, `Dnumber`) VALUES "
+									+ "('"+doc.gerSsn()+"', '"+doc.getFname()+"', '"+doc.getLname()+"', '"+doc.getSex()+"', '"+doc.getDnumber()+"');";
+			        
+					st.executeUpdate(query);
+
+			    }catch(Exception ex){
+			    	System.out.println("Error :"+ ex);
+			    	return false;
+			    	
+			    }
+				return true;
+			case "Paitient":
+				Paitient p=(Paitient)o;
+				try{
+					 
+					String query ="INSERT INTO `Hospital`.`Paitient` (`Pid`, `Fname`, `Lname`, `Sex`, `SSN`) VALUES "
+									+ "('"+p.getPid()+"', '"+p.getFname()+"', '"+p.getLname()+"', '"+p.getSex()+"', '"+p.gerSsn()+"');";
+			        
+					st.executeUpdate(query);
+
+			    }catch(Exception ex){
+			    	System.out.println("Error :"+ ex);
+			    	return false;
+			    	
+			    }
+				return true;
+			case "Appointment":
+				Appointment a=(Appointment)o;
+				
+				return true;
+			default:
+				System.out.println("Error unknown kind");
+		}
+		
+		return false;
+	}
+	/*
 	public void insert(){
 
         try{
@@ -123,6 +198,7 @@ public class DBConnect {
 		
 		
 	}
+	*/
 	public void edit(){
 		try{
 			System.out.print("Plese enter your key:");
