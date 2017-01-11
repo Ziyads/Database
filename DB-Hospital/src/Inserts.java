@@ -1,32 +1,37 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class Inserts extends JFrame {
+/*
+	Stander board:
+	Label x =20
+	Text field x = 138;
+*/
+public class Inserts {
+	private JFrame f1;
+	private JFrame f2;
+	private JFrame f3;
+	private JFrame f4;
+	private JFrame f5;
+	
+	private JPanel g;
+	private JPanel branchP;
+	private JPanel departmentP;
+	private JPanel doctorP;
+	private JPanel paitientP;
+	private JPanel appoinP;
+	
+	//private JComboBox comboBox;
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inserts frame = new Inserts();
-					frame.setVisible(true);
+					Inserts window = new Inserts();
+					window.f1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -34,132 +39,341 @@ public class Inserts extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Inserts() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		magic();
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(111, 6, 231, 42);
-		contentPane.add(comboBox);
+	}
+
+	
+	private void hideAll(){
+		f1.hide();
+		f2.hide();
+		f3.hide();
+		f4.hide();
+		f5.hide();
+	}
+	private void magic(){
+		
+		
+		
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */	
+		f1 = new JFrame();
+		f1.setBounds(100, 100, 450, 300);
+		f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		branchP = new JPanel();
+		branchP.setBorder(new EmptyBorder(5, 5, 5, 5));
+		f1.setContentPane(branchP);
+		branchP.setLayout(null); 
+		
+		JComboBox comboBox1= new JComboBox();
+		comboBox1.setBounds(111, 6, 231, 42);
 		
 		String[] petStrings = { "Branch", "Department", "Doctor", "Paitient", "Appointment" };
-		comboBox.addItem(petStrings[0]);
-		comboBox.addItem(petStrings[1]);
-		comboBox.addItem(petStrings[2]);
-		comboBox.addItem(petStrings[3]);
-		comboBox.addItem(petStrings[4]);
+		comboBox1.addItem(petStrings[0]);
+		comboBox1.addItem(petStrings[1]);
+		comboBox1.addItem(petStrings[2]);
+		comboBox1.addItem(petStrings[3]);
+		comboBox1.addItem(petStrings[4]);
+		comboBox1.setSelectedIndex(0);
+		branchP.add(comboBox1);
+			
+		JTextField tf_bn= new JTextField();
+		tf_bn.setBounds(30, 117, 130, 26);
+		branchP.add(tf_bn);
+		tf_bn.setColumns(10);
 		
-		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		textField = new JTextField();
-		textField.setBounds(30, 117, 130, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		textField.hide();
+		JTextField tf_bc= new JTextField();
+		tf_bc.setBounds(271, 117, 130, 26);
+		branchP.add(tf_bc);
+		tf_bc.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(271, 117, 130, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
-		textField_1.hide();
+		JLabel jl_bn = new JLabel("Branch Number");
+		jl_bn.setBounds(286, 78, 103, 16);
+		branchP.add(jl_bn);
 		
-		JLabel lblNewLabel = new JLabel("Branch Number");
-		lblNewLabel.setBounds(286, 78, 103, 16);
-		contentPane.add(lblNewLabel);
-		lblNewLabel.hide();
+		JLabel jl_bc = new JLabel("City");
+		jl_bc.setToolTipText("City");
+		jl_bc.setBounds(74, 78, 101, 16);
+		branchP.add(jl_bc);
 		
-		JLabel lblNewLabel_1 = new JLabel("City");
-		lblNewLabel_1.setToolTipText("City");
-		lblNewLabel_1.setBounds(74, 78, 101, 16);
-		contentPane.add(lblNewLabel_1);
-		lblNewLabel_1.hide();
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(165, 243, 117, 29);
-		contentPane.add(btnInsert);
-		btnInsert.hide();
+		branchP.add(btnInsert);
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
-		JLabel lblDepartmentNumber = new JLabel("Department number");
-		lblDepartmentNumber.setBounds(20, 125, 141, 16);
-		contentPane.add(lblDepartmentNumber);
-		lblDepartmentNumber.hide();
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		f2 = new JFrame();
+		f2.setBounds(100, 100, 450, 300);
+		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JTextField depnum = new JTextField();
-		depnum.setBounds(170, 67, 130, 26);
-		contentPane.add(depnum);
-		depnum.setColumns(10);
-		depnum.hide();
+		departmentP = new JPanel();
+		departmentP.setBorder(new EmptyBorder(5, 5, 5, 5));
+		f2.setContentPane(departmentP);
+		departmentP.setLayout(null); 
 		
-		JLabel lblDepartmentName = new JLabel("Department name");
-		lblDepartmentName.setBounds(20, 72, 141, 16);
-		contentPane.add(lblDepartmentName);
-		lblDepartmentName.hide();
+		JComboBox comboBox2= new JComboBox();
+		comboBox2.setBounds(111, 6, 231, 42);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(170, 120, 130, 26);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
-		textField_3.hide();
+		comboBox2.addItem(petStrings[0]);
+		comboBox2.addItem(petStrings[1]);
+		comboBox2.addItem(petStrings[2]);
+		comboBox2.addItem(petStrings[3]);
+		comboBox2.addItem(petStrings[4]);
+		comboBox2.setSelectedIndex(1);
+		departmentP.add(comboBox2);
+		
+		
+		JLabel jl_dnum = new JLabel("Department number");
+		jl_dnum.setBounds(20, 125, 141, 16);
+		departmentP.add(jl_dnum);
+		
+		
+		JTextField jt_dn = new JTextField();
+		jt_dn.setBounds(170, 67, 130, 26);
+		departmentP.add(jt_dn);
+		jt_dn.setColumns(10);
+		
+		
+		JLabel jl_dnm = new JLabel("Department name");
+		jl_dnm.setBounds(20, 72, 141, 16);
+		departmentP.add(jl_dnm);
+		
+		
+		JTextField jt_dnm = new JTextField();
+		jt_dnm.setBounds(170, 120, 130, 26);
+		departmentP.add(jt_dnm);
+		jt_dnm.setColumns(10);
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		f3 = new JFrame();
+		f3.setBounds(100, 100, 450, 300);
+		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		doctorP = new JPanel();
+		doctorP.setBorder(new EmptyBorder(5, 5, 5, 5));
+		f3.setContentPane(doctorP);
+		doctorP.setLayout(null);
+		
+		JComboBox comboBox3= new JComboBox();
+		comboBox3.setBounds(111, 6, 231, 42);
+		
+		comboBox3.addItem(petStrings[0]);
+		comboBox3.addItem(petStrings[1]);
+		comboBox3.addItem(petStrings[2]);
+		comboBox3.addItem(petStrings[3]);
+		comboBox3.addItem(petStrings[4]);
+		comboBox3.setSelectedIndex(2);
+		doctorP.add(comboBox3);
+		
+		JLabel jl_fn = new JLabel("First Name");
+		jl_fn.setToolTipText("");
+		jl_fn.setBounds(20, 65, 74, 16);
+		doctorP.add(jl_fn);
+		
+		JTextField jt_fn = new JTextField();
+		jt_fn.setBounds(138, 60, 149, 26);
+		doctorP.add(jt_fn);
+		jt_fn.setColumns(10);
+		
+		JLabel jl_ln = new JLabel("Last Name");
+		jl_ln.setToolTipText("");
+		jl_ln.setBounds(20, 101, 74, 16);
+		doctorP.add(jl_ln);
+		
+		JTextField jt_ln = new JTextField();
+		jt_ln.setColumns(10);
+		jt_ln.setBounds(138, 98, 149, 26);
+		doctorP.add(jt_ln);
+		
+		JLabel jl_s = new JLabel("Sex");
+		jl_s.setBounds(20, 163, 30, 16);
+		doctorP.add(jl_s);
+		
+		JRadioButton jr_m = new JRadioButton("Male");
+		jr_m.setBounds(138, 159, 61, 23);
+		doctorP.add(jr_m);
+		
+		JRadioButton jr_f = new JRadioButton("Female");
+		jr_f.setBounds(211, 159, 76, 23);
+		doctorP.add(jr_f);
+		
+		ButtonGroup btnGroup = new ButtonGroup();
+		btnGroup.add(jr_m);
+		btnGroup.add(jr_f);
+		
+		JLabel jl_ssn = new JLabel("SSN");
+		jl_ssn.setToolTipText("");
+		jl_ssn.setBounds(20, 134, 74, 16);
+		doctorP.add(jl_ssn);
+		
+		JTextField jt_ssn = new JTextField();
+		jt_ssn.setColumns(10);
+		jt_ssn.setBounds(138, 129, 149, 26);
+		doctorP.add(jt_ssn);
+		
+		JLabel jl_dno = new JLabel("Department No.");
+		jl_dno.setToolTipText("");
+		jl_dno.setBounds(20, 194, 100, 16);
+		doctorP.add(jl_dno);
+		
+		JComboBox jc_dno = new JComboBox();
+		jc_dno.setBounds(160, 189, 116, 27);
+		doctorP.add(jc_dno);
+		
+		JButton btnNewButton = new JButton("Insert");
+		btnNewButton.setBounds(159, 228, 117, 29);
+		doctorP.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		f4 = new JFrame();
+		f4.setBounds(100, 100, 450, 300);
+		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		paitientP = new JPanel();
+		paitientP.setBorder(new EmptyBorder(5, 5, 5, 5));
+		f4.setContentPane(paitientP);
+		paitientP.setLayout(null);
+		
+		JComboBox comboBox4= new JComboBox();
+		comboBox4.setBounds(111, 6, 231, 42);
+		
+		comboBox4.addItem(petStrings[0]);
+		comboBox4.addItem(petStrings[1]);
+		comboBox4.addItem(petStrings[2]);
+		comboBox4.addItem(petStrings[3]);
+		comboBox4.addItem(petStrings[4]);
+		comboBox4.setSelectedIndex(3);
+		paitientP.add(comboBox4);
+		
+		JTextField textField_5 = new JTextField();
+		textField_5.setBounds(138, 60, 130, 26);
+		paitientP.add(textField_5);
+		textField_5.setColumns(10);
+		
+		JLabel jl_ffn = new JLabel("First name");
+		jl_ffn.setBounds(20, 65, 86, 16);
+		paitientP.add(jl_ffn);
+		
+		JTextField textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(138, 98, 130, 26);
+		paitientP.add(textField_6);
+		
+		JLabel lblLastName_1 = new JLabel("Last name");
+		lblLastName_1.setBounds(20, 103, 86, 16);
+		paitientP.add(lblLastName_1);
+		
+		JTextField textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(138, 136, 130, 26);
+		paitientP.add(textField_7);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setBounds(20, 141, 86, 16);
+		paitientP.add(lblId);
+		
+		JTextField textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(138, 169, 130, 26);
+		paitientP.add(textField_8);
+		
+		JLabel lblSsn_1 = new JLabel("SSN");
+		lblSsn_1.setBounds(20, 174, 86, 16);
+		paitientP.add(lblSsn_1);
+		
+		JLabel lblSex_1 = new JLabel("Sex");
+		lblSex_1.setBounds(20, 202, 86, 16);
+		paitientP.add(lblSex_1);
+		
+		JRadioButton rdbtnM = new JRadioButton("M");
+		rdbtnM.setBounds(148, 207, 43, 23);
+		paitientP.add(rdbtnM);
+		
+		JRadioButton rdbtnF = new JRadioButton("F");
+		rdbtnF.setBounds(215, 207, 43, 23);
+		paitientP.add(rdbtnF);
+		
+		ButtonGroup btnGroup1 = new ButtonGroup();
+		btnGroup1.add(rdbtnM);
+		btnGroup1.add(rdbtnF);
+		JButton btnInsert_1 = new JButton("Insert");
+		btnInsert_1.setBounds(151, 243, 100, 29);
+		paitientP.add(btnInsert_1);
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+		f5 = new JFrame();
+		f5.setBounds(100, 100, 450, 300);
+		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		appoinP = new JPanel();
+		appoinP.setBorder(new EmptyBorder(5, 5, 5, 5));
+		f5.setContentPane(appoinP);
+		appoinP.setLayout(null); 
+		
+		JComboBox comboBox5= new JComboBox();
+		comboBox5.setBounds(111, 6, 231, 42);
+		
+		comboBox5.addItem(petStrings[0]);
+		comboBox5.addItem(petStrings[1]);
+		comboBox5.addItem(petStrings[2]);
+		comboBox5.addItem(petStrings[3]);
+		comboBox5.addItem(petStrings[4]);
+		comboBox5.setSelectedIndex(4);
+		appoinP.add(comboBox5);
+			
 		JLabel lblNewLabel_3 = new JLabel("Paitient_ID");
 		lblNewLabel_3.setBounds(20, 52, 80, 16);
-		contentPane.add(lblNewLabel_3);
-		lblNewLabel_3.hide();
+		appoinP.add(lblNewLabel_3);
 		
 		JLabel lblDoctorssn = new JLabel("Doctor_SSN");
 		lblDoctorssn.setBounds(20, 85, 80, 16);
-		contentPane.add(lblDoctorssn);
-		lblDoctorssn.hide();
+		appoinP.add(lblDoctorssn);
 		
 		JComboBox comboBox_ID = new JComboBox();
 		comboBox_ID.setBounds(138, 48, 119, 27);
-		contentPane.add(comboBox_ID);
-		comboBox_ID.hide();
+		appoinP.add(comboBox_ID);
 		
 		JComboBox comboBox_SSN = new JComboBox();
 		comboBox_SSN.setBounds(138, 81, 119, 27);
-		contentPane.add(comboBox_SSN);
-		comboBox_SSN.hide();
+		appoinP.add(comboBox_SSN);
 		
 		JLabel lblDate = new JLabel("Date");
 		lblDate.setBounds(20, 120, 80, 16);
-		contentPane.add(lblDate);
-		lblDate.hide();
+		appoinP.add(lblDate);
 		
 		JLabel lblYear = new JLabel("Year");
 		lblYear.setBounds(159, 120, 45, 16);
-		contentPane.add(lblYear);
-		lblYear.hide();
+		appoinP.add(lblYear);
 		
 		JLabel lblMonth = new JLabel("Month");
 		lblMonth.setBounds(262, 120, 80, 16);
-		contentPane.add(lblMonth);
-		lblMonth.hide();
+		appoinP.add(lblMonth);
 		
 		JLabel lblDay = new JLabel("Day");
 		lblDay.setBounds(364, 120, 80, 16);
-		contentPane.add(lblDay);
-		lblDay.hide();
+		appoinP.add(lblDay);
 		
 		JComboBox comboBox_Y = new JComboBox();
 		comboBox_Y.setBounds(138, 142, 99, 27);
-		contentPane.add(comboBox_Y);
-		comboBox_Y.hide();
+		appoinP.add(comboBox_Y);
 		
 		int year[] = { 2016, 2017, 2018, 2019, 2020 };
 		comboBox_Y.addItem(year[0]);
@@ -169,16 +383,14 @@ public class Inserts extends JFrame {
 		comboBox_Y.addItem(year[4]);
 		JComboBox comboBox_M = new JComboBox();
 		comboBox_M.setBounds(243, 142, 95, 27);
-		contentPane.add(comboBox_M);
-		comboBox_M.hide();
+		appoinP.add(comboBox_M);
 		
 		int month[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
 		for (int i = 0; i < month.length; i++)
 			comboBox_M.addItem(month[i]);
 		JComboBox comboBox_D = new JComboBox();
 		comboBox_D.setBounds(347, 142, 80, 27);
-		contentPane.add(comboBox_D);
-		comboBox_D.hide();
+		appoinP.add(comboBox_D);
 		
 		int day[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
 				25, 26, 27, 28, 29, 30, 31 };
@@ -187,136 +399,210 @@ public class Inserts extends JFrame {
 		
 		JLabel lblTime = new JLabel("Time");
 		lblTime.setBounds(20, 186, 80, 16);
-		contentPane.add(lblTime);
-		lblTime.hide();
+		appoinP.add(lblTime);
 		
 		JLabel lblHours = new JLabel("Hours");
 		lblHours.setBounds(159, 186, 45, 16);
-		contentPane.add(lblHours);
-		lblHours.hide();
+		appoinP.add(lblHours);
 		
 		JLabel lblHours_1 = new JLabel("Minutes");
 		lblHours_1.setBounds(262, 186, 80, 16);
-		contentPane.add(lblHours_1);
-		lblHours_1.hide();
+		appoinP.add(lblHours_1);
 		
 		JComboBox comboBox_H = new JComboBox();
 		comboBox_H.setBounds(142, 207, 95, 27);
-		contentPane.add(comboBox_H);
-		comboBox_H.hide();
+		appoinP.add(comboBox_H);
 		
 		int hour[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,00 };
 		for (int i = 0; i < hour.length; i++)
 			comboBox_H.addItem(hour[i]);
 		JComboBox comboBox_Min = new JComboBox();
 		comboBox_Min.setBounds(243, 207, 91, 27);
-		contentPane.add(comboBox_Min);
+		appoinP.add(comboBox_Min);
 		int min[] = { 0, 10, 20, 30, 40, 50 };
 		for (int i = 0; i < min.length; i++)
 			comboBox_Min.addItem(min[i]);
-		comboBox_Min.hide();
 		
 		JButton btnInsert_2 = new JButton("Insert");
 		btnInsert_2.setBounds(163, 246, 117, 29);
-		contentPane.add(btnInsert_2);
-		btnInsert_2.hide();
+		appoinP.add(btnInsert_2);
 		
-		
-		
-		comboBox.addActionListener(new ActionListener() {
+		comboBox1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String s=e.getSource().toString().substring(277);
 				String z=s.substring(0, s.length()-1);
+				
+			
+
+				hideAll();
 				switch(z){
 					case "Branch":
-						textField.show();
-						textField_1.show();
-						lblNewLabel.show();
-						lblNewLabel_1.show();
-						btnInsert.show();
-						/*
-						textField = new JTextField();
-						textField.setBounds(30, 117, 130, 26);
-						contentPane.add(textField);
-						textField.setColumns(10);
-						
-						
-						textField_1 = new JTextField();
-						textField_1.setBounds(271, 117, 130, 26);
-						contentPane.add(textField_1);
-						textField_1.setColumns(10);
-						
-						JLabel lblNewLabel = new JLabel("Branch Number");
-						lblNewLabel.setBounds(286, 78, 103, 16);
-						contentPane.add(lblNewLabel);
-						
-						JLabel lblNewLabel_1 = new JLabel("City");
-						lblNewLabel_1.setToolTipText("City");
-						lblNewLabel_1.setBounds(74, 78, 101, 16);
-						contentPane.add(lblNewLabel_1);
-						
-						JButton btnInsert = new JButton("Insert");
-						btnInsert.setBounds(165, 243, 117, 29);
-						contentPane.add(btnInsert);
-						*/
-						
+						f1.show();
+		
 						break;
 					case "Department":
-						lblDepartmentNumber.hide();
-						depnum.show();
-						lblDepartmentName.show();
-						textField_3.show();
-						/*
-						JLabel lblDepartmentNumber = new JLabel("Department number");
-						lblDepartmentNumber.setBounds(20, 125, 141, 16);
-						contentPane.add(lblDepartmentNumber);
-						lblDepartmentNumber.show();
-						
-						JTextField depnum = new JTextField();
-						depnum.setBounds(170, 67, 130, 26);
-						contentPane.add(depnum);
-						depnum.setColumns(10);
-						
-						JLabel lblDepartmentName = new JLabel("Department name");
-						lblDepartmentName.setBounds(20, 72, 141, 16);
-						contentPane.add(lblDepartmentName);
-						
-						textField_3 = new JTextField();
-						textField_3.setBounds(170, 120, 130, 26);
-						contentPane.add(textField_3);
-						textField_3.setColumns(10);
-						*/
+					
+						f2.show();
 						break;
 					case "Doctor":
-						
+						f3.show();
 						
 						break;
 					case "Paitient":
-						
+						f4.show();
 						
 						break;
 					case "Appointment":
-					
-						lblNewLabel_3.show();
-						lblDoctorssn.show();
-						comboBox_ID.show();
-						comboBox_SSN.show();
-						lblDate.show();
-						lblYear.show();
-						lblMonth.show();
-						lblDay.show();
-						comboBox_Y.show();
-						comboBox_M.show();
-						comboBox_D.show();
-						lblTime.show();
-						lblHours.show();
-						lblHours_1.show();
-						comboBox_H.show();
-						comboBox_Min.show();
-						btnInsert_2.show();
-						break;
-					
+						f5.show();
 						
+						
+						break;
+					default:
+						System.out.println("*");
+				}
+				
+			}
+		});
+		comboBox2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s=e.getSource().toString().substring(277);
+				String z=s.substring(0, s.length()-1);
+				
+			
+
+				hideAll();
+				switch(z){
+					case "Branch":
+						f1.show();
+		
+						break;
+					case "Department":
+						f2.show();
+						
+						break;
+					case "Doctor":
+						f3.show();
+						
+						break;
+					case "Paitient":
+						f4.show();
+						
+						break;
+					case "Appointment":
+						f5.show();
+						
+						
+						break;
+					default:
+						System.out.println("*");
+				}
+				
+			}
+		});
+		comboBox3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s=e.getSource().toString().substring(277);
+				String z=s.substring(0, s.length()-1);
+				
+			
+
+				hideAll();
+				switch(z){
+					case "Branch":
+						f1.show();
+		
+						break;
+					case "Department":					
+						f2.show();
+						
+						break;
+					case "Doctor":
+						f3.show();
+						
+						break;
+					case "Paitient":
+						f4.show();
+						
+						break;
+					case "Appointment":
+						f5.show();
+						
+						
+						break;
+					default:
+						System.out.println("*");
+				}
+				
+			}
+		});
+		comboBox4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s=e.getSource().toString().substring(277);
+				String z=s.substring(0, s.length()-1);
+				
+			
+
+				hideAll();
+				switch(z){
+					case "Branch":
+						f1.show();
+		
+						break;
+					case "Department":
+					
+						f2.show();
+					
+						break;
+					case "Doctor":
+						f3.show();
+						
+						break;
+					case "Paitient":
+						f4.show();
+						
+						break;
+					case "Appointment":
+						f5.show();
+						
+						
+						break;
+					default:
+						System.out.println("*");
+				}
+				
+			}
+		});
+		comboBox5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String s=e.getSource().toString().substring(277);
+				String z=s.substring(0, s.length()-1);
+				
+			
+
+				hideAll();
+				switch(z){
+					case "Branch":
+						f1.show();
+		
+						break;
+					case "Department":
+						f2.show();
+						
+						break;
+					case "Doctor":
+						f3.show();
+						
+						break;
+					case "Paitient":
+						f4.show();
+						
+						break;
+					case "Appointment":
+						f5.show();
+						
+						break;
+					default:
+						System.out.println("*");
 				}
 				
 			}
