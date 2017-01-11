@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -56,9 +58,23 @@ public class GUI extends JFrame {
 		btnNewButton.setBounds(31, 243, 117, 29);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Insert");
-		btnNewButton_1.setBounds(176, 243, 117, 29);
-		contentPane.add(btnNewButton_1);
+		JButton jb_insert = new JButton("Insert");
+		jb_insert.setBounds(176, 243, 117, 29);
+		contentPane.add(jb_insert);
+		jb_insert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							Inserts window = new Inserts();
+							window.f1.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		
 		JButton btnNewButton_2 = new JButton("Delete");
 		btnNewButton_2.setBounds(307, 243, 117, 29);

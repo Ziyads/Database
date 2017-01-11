@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 	Text field x = 138;
 */
 public class Inserts {
-	private JFrame f1;
+	public JFrame f1;
 	private JFrame f2;
 	private JFrame f3;
 	private JFrame f4;
@@ -24,6 +24,7 @@ public class Inserts {
 	private JPanel paitientP;
 	private JPanel appoinP;
 	
+	private int hid=999999;
 	//private JComboBox comboBox;
 
 	public static void main(String[] args) {
@@ -40,7 +41,10 @@ public class Inserts {
 	}
 
 	public Inserts() {
+		
 		magic();
+		
+	
 		
 	}
 
@@ -160,6 +164,36 @@ public class Inserts {
 		jt_dnm.setBounds(170, 120, 130, 26);
 		departmentP.add(jt_dnm);
 		jt_dnm.setColumns(10);
+		
+		JLabel jl_bnumb = new JLabel("Branch number");
+		jl_bnumb.setBounds(20, 176, 141, 16);
+		departmentP.add(jl_bnumb);
+		
+		JComboBox bnums= new JComboBox();
+		bnums.setBounds(170, 176, 130, 26);
+		
+		departmentP.add(bnums);
+		
+		JButton jb_dep = new JButton("Insert");
+		jb_dep.setBounds(165, 243, 90, 29);
+		int arrBn[]=DBC.getBNums();
+		for(int i=0;i<arrBn.length;i++)
+			bnums.addItem(arrBn[i]);
+		
+		departmentP.add(jb_dep);
+		
+		jb_dep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String dn=jt_dnm.getText();
+				int dnum=Integer.parseInt(dn);
+				
+				String depN=jt_dnm.getText();
+				
+				int bnum=arrBn[bnums.getSelectedIndex()];
+				Department depO=new Department(dnum,depN,bnum,hid);
+				boolean flag=DBC.insert("Department", depO);
+			}
+		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
