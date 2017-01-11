@@ -227,6 +227,8 @@ public class GUI extends JFrame {
 						break;
 					case "Doctor":
 						
+						
+						
 						break;
 					case "Paitient":
 						
