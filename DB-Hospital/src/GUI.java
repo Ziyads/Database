@@ -50,9 +50,17 @@ public class GUI extends JFrame {
 		
 		
 		
-		table = new JTable();
+		DefaultTableModel model = new DefaultTableModel();
+	    model.addColumn("Code");
+	    model.addColumn("Name");
+	    model.addColumn("Quantity");
+	    model.addColumn("Unit Price");
+	    model.addColumn("Price");
+		table = new JTable(model);
 		table.setBounds(21, 6, 403, 190);
 		contentPane.add(table);
+		DefaultTableModel modelz = (DefaultTableModel) table.getModel();
+        modelz.addRow(new Object[]{"Bnumber", "Hid", "Location","",""});
 		
 		
 		JComboBox comboBox = new JComboBox();
@@ -72,17 +80,16 @@ public class GUI extends JFrame {
 		contentPane.add(btnView);
 		btnView.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String s=e.getSource().toString().substring(277);
-				String z=s.substring(0, s.length()-1);
+				String z=comboBox.getSelectedItem().toString();
 				DBConnect DBC=new DBConnect();
 			
-
 				switch(z){
 					case "Branch":
-						 
-							
-						  
-						      
+						String s[][]=DBC.getData("Branch");
+				        DefaultTableModel modelf = (DefaultTableModel) table.getModel();
+				        for(int i=0;i<s.length;i++)
+				        	modelf.addRow(new Object[]{""+s[i][0]+"", ""+s[i][1]+"", ""+s[i][2]+"","",""});
+						
 						  
 						break;
 					case "Department":

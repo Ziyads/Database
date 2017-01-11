@@ -48,22 +48,81 @@ public class DBConnect {
 			return r;
 		}
 	}
-	public void getData(){
+	public String[][] getData(String kind){
+		switch(kind){
+			case "Branch":
+				try{
+					String query = "Select * from Branch";
+					rs = st.executeQuery(query);
+					System.out.println("Record from Database");
+					int size=0;
+					while(rs.next()){
+						size++;
+					}
+					
+					String ress[][]=new String[size][3];
+					rs = st.executeQuery(query);
+					int i=0;
+					while(rs.next()){
+						String Bnumber = rs.getString("Bnumber");
+						String Hid = rs.getString("Hid");
+						String Location = rs.getString("Location");
+						
+						ress[i][0]=Bnumber;
+						ress[i][1]=Hid;
+						ress[i][2]=Location;
+						
+							i++;	
+						System.out.println("Doctor's name [ "+ Bnumber+" ] .. His SSN [ "+Hid+" ] .. His BirthDate [ "+Location+" ]");
+					}
+					return ress;
+				}catch(Exception ex){
+					System.out.println("Error :"+ ex);
+				}
+			case "Department":
+				try{
+					String query = "Select * from Department";
+					rs = st.executeQuery(query);
+					System.out.println("Record from Database");
+					int size=0;
+					while(rs.next()){
+						size++;
+					}
+					
+					String ress[][]=new String[size][3];
+					rs = st.executeQuery(query);
+					int i=0;
+					while(rs.next()){
+						String Bnumber = rs.getString("Bnumber");
+						String Hid = rs.getString("Hid");
+						String Location = rs.getString("Location");
+						
+						ress[i][0]=Bnumber;
+						ress[i][1]=Hid;
+						ress[i][2]=Location;
+						
+							i++;	
+						System.out.println("Doctor's name [ "+ Bnumber+" ] .. His SSN [ "+Hid+" ] .. His BirthDate [ "+Location+" ]");
+					}
+					return ress;
+				}catch(Exception ex){
+					System.out.println("Error :"+ ex);
+				}
 		
-		try{
-			String query = "Select * from Doctor";
-			rs = st.executeQuery(query);
-			System.out.println("Record from Database");
-			while(rs.next()){
-				String name = rs.getString("Name");
-				String ssn = rs.getString("SSN");
-				String BD = rs.getString("BirthDate");
-				System.out.println("Doctor's name [ "+ name+" ] .. His SSN [ "+ssn+" ] .. His BirthDate [ "+BD+" ]");
-			}
+			case "Doctor":
+		
+			case "Paitient":
+		
+			case "Appointment":
 			
-		}catch(Exception ex){
-			System.out.println("Error :"+ ex);
+			
+		    	
+		    	
+		 
+			default:
+				System.out.println("Error unknown kind");
 		}
+		return null;
 		
 	}
 	
