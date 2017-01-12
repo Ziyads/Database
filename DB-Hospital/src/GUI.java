@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
@@ -51,18 +52,24 @@ public class GUI extends JFrame {
 		
 		DBConnect DBC=new DBConnect();
 		
-		
-		DefaultTableModel model = new DefaultTableModel();
-	    model.addColumn("Code");
-	    model.addColumn("Name");
-	    model.addColumn("Quantity");
-	    model.addColumn("Unit Price");
-	    model.addColumn("Price");
-		table = new JTable(model);
+		/*
+		DefaultTableModel model =new DefaultTableModel(new Object[] { "Initial Column" }, 3);
+	    model.addColumn("Code"+0);
+	    model.addColumn("Name"+1);
+	    model.addColumn("Quantity"+2);
+	    model.addColumn("Unit Price"+3);
+	    model.addColumn("Price"+4);
+	    model.addColumn("Price"+5);
+	    */
+		table = new JTable();
 		table.setBounds(21, 6, 403, 190);
 		contentPane.add(table);
-		//table.scrollRectToVisible(null);
 		
+		JScrollPane jp=new JScrollPane(table);
+	    jp.setBounds(21, 6, 403, 190);
+	    jp.setVisible(true);
+	    add(jp);
+	    contentPane.add(jp);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(31, 208, 142, 27);
@@ -83,6 +90,8 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String z=comboBox.getSelectedItem().toString();
 				
+				DefaultTableModel ii = (DefaultTableModel) table.getModel();
+			    ii.setColumnCount(0);
 			
 				DefaultTableModel model = (DefaultTableModel) table.getModel();
 				model.setRowCount(0);
@@ -92,7 +101,14 @@ public class GUI extends JFrame {
 						
 						
 						DefaultTableModel bM = (DefaultTableModel) table.getModel();
+					    bM.addColumn("Bnumber");
+					    bM.addColumn("Hid");
+					    bM.addColumn("Location");
+					   
+						/*
+						DefaultTableModel bM = (DefaultTableModel) table.getModel();
 				        bM.addRow(new Object[]{"Bnumber", "Hid", "Location","",""});
+				        */
 						
 						String arrB[][]=DBC.getData("Branch");
 				        DefaultTableModel m_b = (DefaultTableModel) table.getModel();
@@ -102,10 +118,12 @@ public class GUI extends JFrame {
 						  
 						break;
 					case "Department":
-						
-						
+
 						DefaultTableModel depM = (DefaultTableModel) table.getModel();
-						depM.addRow(new Object[]{"Dnumber","Dname","Bnumber","Hid"});
+					    depM.addColumn("Dnumber");
+					    depM.addColumn("Dname");
+					    depM.addColumn("Bnumber");
+					    depM.addColumn("Hid");
 						
 						String arrDp[][]=DBC.getData("Department");
 				        DefaultTableModel m_dep = (DefaultTableModel) table.getModel();
@@ -117,7 +135,11 @@ public class GUI extends JFrame {
 						
 						
 						DefaultTableModel docM = (DefaultTableModel) table.getModel();
-						docM.addRow(new Object[]{"SSN","Fname","Lname","Sex","Dnumber"});
+						docM.addColumn("SSN");
+						docM.addColumn("Fname");
+						docM.addColumn("Lname");
+						docM.addColumn("Sex");
+						docM.addColumn("Dnumber");
 						
 						String arrD[][]=DBC.getData("Doctor");
 				        DefaultTableModel m_doc = (DefaultTableModel) table.getModel();
@@ -129,8 +151,12 @@ public class GUI extends JFrame {
 						
 						
 						DefaultTableModel paM = (DefaultTableModel) table.getModel();
-						paM.addRow(new Object[]{"Pid","Fname","Lname","Sex","SSN"});
-						
+						paM.addColumn("Pid");
+						paM.addColumn("Fname");
+						paM.addColumn("Lname");
+						paM.addColumn("Sex");
+						paM.addColumn("SSN");
+
 						String arrP[][]=DBC.getData("Paitient");
 				        DefaultTableModel m_p = (DefaultTableModel) table.getModel();
 				        for(int i=0;i<arrP.length;i++)
@@ -141,7 +167,12 @@ public class GUI extends JFrame {
 						
 						
 						DefaultTableModel aponM = (DefaultTableModel) table.getModel();
-						aponM.addRow(new Object[]{"DSSN","Pid","Appno.","time","date","price"});
+						aponM.addColumn("DSSN");
+						aponM.addColumn("Pid");
+						aponM.addColumn("Appno.");
+						aponM.addColumn("time");
+						aponM.addColumn("date");
+						aponM.addColumn("price");
 						
 						String arrAp[][]=DBC.getData("Appointment");
 				        DefaultTableModel m_ap = (DefaultTableModel) table.getModel();
