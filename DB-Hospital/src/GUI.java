@@ -61,7 +61,7 @@ public class GUI extends JFrame {
 		table = new JTable(model);
 		table.setBounds(21, 6, 403, 190);
 		contentPane.add(table);
-		
+		//table.scrollRectToVisible(null);
 		
 		
 		JComboBox comboBox = new JComboBox();
@@ -196,6 +196,7 @@ public class GUI extends JFrame {
 				
 				switch(z){
 					case "Branch":
+						
 						String Bnumber=table.getValueAt(si, 0).toString();
 						int bnum=Integer.parseInt(Bnumber);
 						String Hid=table.getValueAt(si, 1).toString();
@@ -227,21 +228,61 @@ public class GUI extends JFrame {
 						break;
 					case "Doctor":
 						
+						String dssn=table.getValueAt(si, 0).toString();
+						int dsn=Integer.parseInt(dssn);
 						
+						String Fname=table.getValueAt(si, 1).toString();
+						
+						String Lname=table.getValueAt(si, 2).toString();
+	
+						String sex=table.getValueAt(si, 3).toString();
+						
+						int dpnum=Integer.parseInt(table.getValueAt(si, 4).toString());
+						
+						Doctor doc=new Doctor(dsn,Fname,Lname,sex,dpnum);
+						DBC.delete("Doctor",doc);
 						
 						break;
 					case "Paitient":
 						
+						String pid=table.getValueAt(si, 0).toString();
+						int idd=Integer.parseInt(pid);
+						
+						String Fn=table.getValueAt(si, 1).toString();
+						
+						String Ln=table.getValueAt(si, 2).toString();
+	
+						String sexx=table.getValueAt(si, 3).toString();
+						
+						int ssnn=Integer.parseInt(table.getValueAt(si, 4).toString());
+						
+						Paitient pi=new Paitient(idd,Fn,Ln,sexx,ssnn);
+						DBC.delete("Paitient",pi);
 						
 						break;
 					case "Appointment":
 						
+						int DSSN=Integer.parseInt(table.getValueAt(si, 0).toString());
 						
+						
+						int PID=Integer.parseInt(table.getValueAt(si, 1).toString());
+						
+						int APPNO=Integer.parseInt(table.getValueAt(si, 2).toString());
+	
+						String time=table.getValueAt(si, 3).toString();
+						
+						String date=table.getValueAt(si, 4).toString();
+						
+						double price=Double.parseDouble(table.getValueAt(si, 5).toString());
+						
+						Appointment api=new Appointment(DSSN,PID,APPNO,time,date,price);
+						DBC.delete("Appointment",api);
 						
 						break;
 					default:
 						System.out.println("*");
 				}
+				btnView.doClick();
 				
 			}
 		});

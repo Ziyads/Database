@@ -103,7 +103,7 @@ class Paitient{
 	private String sex;
 	private int ssn;
 	
-	public Paitient(int Pid,String Fname,String Lname,String sex,int Dnumber,int ssn){
+	public Paitient(int Pid,String Fname,String Lname,String sex,int ssn){
 		this.Pid=Pid;
 		this.Fname=Fname;
 		this.Lname=Lname;

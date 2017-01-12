@@ -17,7 +17,6 @@ public class Inserts {
 	private JFrame f4;
 	private JFrame f5;
 	
-	private JPanel g;
 	private JPanel branchP;
 	private JPanel departmentP;
 	private JPanel doctorP;
@@ -118,6 +117,10 @@ public class Inserts {
 				Branch brO=new Branch(bnum,hid,loc);
 				boolean flag=DBC.insert("Branch",brO);
 				if(flag){
+				  JOptionPane pane = new JOptionPane();
+				  pane.setMessage("Sucssefuly insertd");
+			      JDialog dialog = pane.createDialog( "Notfication");
+				  dialog.show();
 				  f1.hide();
 				}
 			}
@@ -194,7 +197,15 @@ public class Inserts {
 				
 				int bnum=arrBn[bnums.getSelectedIndex()];
 				Department depO=new Department(dnum,depN,bnum,hid);
+				
 				boolean flag=DBC.insert("Department", depO);
+				if(flag){
+					  JOptionPane pane = new JOptionPane();
+					  pane.setMessage("Sucssefuly insertd");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+					  f2.hide();
+					}
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -282,7 +293,15 @@ public class Inserts {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Doctor doc=new Doctor(Integer.parseInt(jt_ssn.getText()),jt_fn.getText(),jt_ln.getText(),btnGroup.getElements().toString(),Integer.parseInt(jc_dno.getSelectedItem().toString()));
+				boolean flag=DBC.insert("Doctor", doc);
+				if(flag){
+					  JOptionPane pane = new JOptionPane();
+					  pane.setMessage("Sucssefuly insertd");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+					  f3.hide();
+					}
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
