@@ -115,6 +115,7 @@ public class Inserts {
 				String loc=tf_bn.getText();
 				
 				Branch brO=new Branch(bnum,hid,loc);
+				
 				boolean flag=DBC.insert("Branch",brO);
 				if(flag){
 				  JOptionPane pane = new JOptionPane();
@@ -123,6 +124,7 @@ public class Inserts {
 				  dialog.show();
 				  f1.hide();
 				}
+				
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
@@ -177,14 +179,16 @@ public class Inserts {
 		
 		JComboBox bnums= new JComboBox();
 		bnums.setBounds(170, 176, 130, 26);
-		
 		departmentP.add(bnums);
 		
-		JButton jb_dep = new JButton("Insert");
-		jb_dep.setBounds(165, 243, 90, 29);
 		int arrBn[]=DBC.getBNums();
 		for(int i=0;i<arrBn.length;i++)
 			bnums.addItem(arrBn[i]);
+		
+		
+		JButton jb_dep = new JButton("Insert");
+		jb_dep.setBounds(165, 243, 90, 29);
+		
 		
 		departmentP.add(jb_dep);
 		
@@ -206,6 +210,7 @@ public class Inserts {
 					  dialog.show();
 					  f2.hide();
 					}
+				
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -278,14 +283,50 @@ public class Inserts {
 		jt_ssn.setBounds(138, 129, 149, 26);
 		doctorP.add(jt_ssn);
 		
-		JLabel jl_dno = new JLabel("Department No.");
+		JLabel jl_dno = new JLabel("Branch number");
 		jl_dno.setToolTipText("");
 		jl_dno.setBounds(20, 194, 100, 16);
 		doctorP.add(jl_dno);
 		
-		JComboBox jc_dno = new JComboBox();
-		jc_dno.setBounds(160, 189, 116, 27);
-		doctorP.add(jc_dno);
+		JComboBox jc_brnn = new JComboBox();
+		jc_brnn.setBounds(138, 189, 70, 27);
+		doctorP.add(jc_brnn);
+		int d_arrBn[]=DBC.getBNums();
+		jc_brnn.addItem("--");
+		for (int i = 0; i < d_arrBn.length; i++) 
+			jc_brnn.addItem(d_arrBn[i]);
+		
+	
+		
+		JLabel jl_dnoo = new JLabel("Dep num");
+		jl_dnoo.setToolTipText("");
+		jl_dnoo.setBounds(221, 189, 60, 16);
+		doctorP.add(jl_dnoo);
+		
+		JComboBox jc_dnn = new JComboBox();
+		jc_dnn.setBounds(288, 189, 100, 27);
+		doctorP.add(jc_dnn);
+		
+		
+		
+		jc_brnn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jc_dnn.removeAllItems();
+				String ddd=jc_brnn.getSelectedItem().toString();
+				int x=0;
+				if(!ddd.equals("---")){
+					int branchNum=Integer.parseInt(ddd);
+					int d_arrDep[]=DBC.getDnum(branchNum);
+					for (int i = 0; i < d_arrDep.length; i++){
+						jc_dnn.addItem(d_arrDep[i]);
+						x++;
+					}
+				}
+				
+					if(x==0)
+						jc_dnn.addItem("Empty");
+			}
+		});
 		
 		JButton btnNewButton = new JButton("Insert");
 		btnNewButton.setBounds(159, 228, 117, 29);
@@ -293,7 +334,18 @@ public class Inserts {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Doctor doc=new Doctor(Integer.parseInt(jt_ssn.getText()),jt_fn.getText(),jt_ln.getText(),btnGroup.getElements().toString(),Integer.parseInt(jc_dno.getSelectedItem().toString()));
+				int dssn=Integer.parseInt(jt_ssn.getText());
+				String d_Fname=jt_fn.getText();
+				String d_Lname=jt_ln.getText();
+				String d_sex="";
+				if(jr_m.isSelected())
+					d_sex="M";
+				if(jr_f.isSelected())
+					d_sex="F";
+				int d_Bn=Integer.parseInt(jc_dnn.getSelectedItem().toString());
+				
+				Doctor doc=new Doctor(dssn,d_Fname,d_Lname,d_sex,d_Bn);
+				
 				boolean flag=DBC.insert("Doctor", doc);
 				if(flag){
 					  JOptionPane pane = new JOptionPane();
@@ -301,7 +353,8 @@ public class Inserts {
 				      JDialog dialog = pane.createDialog( "Notfication");
 					  dialog.show();
 					  f3.hide();
-					}
+				}
+				
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */

@@ -25,7 +25,30 @@ public class DBConnect {
 			System.out.println("Error: "+ex);
 		}
 	}
-	
+	public int[] getDnum(int bn){
+		try{
+			String query = "Select * from `Hospital`.`Department` where Bnumber='"+bn+"' ";
+			rs = st.executeQuery(query);
+			
+			int size=0;
+			while(rs.next()){
+				size++;
+			}
+			
+			int res[]=new int[size];
+			rs = st.executeQuery(query);
+			int i=0;
+			while(rs.next()){
+				res[i]=rs.getInt("Dnumber");
+				i++;
+			}
+			return res;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			int r[]=new int[0];
+			return r;
+		}
+	}
 	public int[] getBNums(){
 		try{
 			String query = "Select * from `Hospital`.`Branch`";
