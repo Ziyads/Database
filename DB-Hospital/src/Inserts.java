@@ -64,7 +64,7 @@ public class Inserts {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */	
 		f1 = new JFrame();
-		f1.setBounds(100, 100, 450, 300);
+		f1.setBounds(600, 100, 450, 300);
 		f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		branchP = new JPanel();
@@ -132,7 +132,7 @@ public class Inserts {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f2 = new JFrame();
-		f2.setBounds(100, 100, 450, 300);
+		f2.setBounds(600, 100, 450, 300);
 		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		departmentP = new JPanel();
@@ -218,7 +218,7 @@ public class Inserts {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f3 = new JFrame();
-		f3.setBounds(100, 100, 450, 300);
+		f3.setBounds(600, 100, 450, 300);
 		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		doctorP = new JPanel();
@@ -362,7 +362,7 @@ public class Inserts {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f4 = new JFrame();
-		f4.setBounds(100, 100, 450, 300);
+		f4.setBounds(600, 100, 450, 300);
 		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		paitientP = new JPanel();
@@ -440,7 +440,7 @@ public class Inserts {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f5 = new JFrame();
-		f5.setBounds(100, 100, 450, 300);
+		f5.setBounds(600, 100, 450, 300);
 		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		appoinP = new JPanel();

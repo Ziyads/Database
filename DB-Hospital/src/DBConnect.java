@@ -254,51 +254,7 @@ public class DBConnect {
 		
 	}
 	
-	public void search(){
-		
-		try{
-			System.out.println("Please enter what do you want to search");
-			System.out.println("Enter ( d ) for Docter and ( p ) for Patient  ");
-			System.out.println("Your input: ");
-			String input = s.nextLine();
-			
-			System.out.println("Please enter the SSN: ");
-			int ssnInput= s.nextInt();
-			
-			switch(input.charAt(0)){
-				case 'd':		{String query = "Select * from Doctor";
-									rs = st.executeQuery(query);
-									System.out.println("");
-									while(rs.next()){
-										String name = rs.getString("Name");
-										String ssn = rs.getString("SSN");
-										String BD = rs.getString("BirthDate");
-										int x = Integer.parseInt(ssn);
-										if(  x == ssnInput)
-											System.out.println("Doctor's name [ "+ name+" ] .. His SSN [ "+ssn+" ] .. His BirthDate [ "+BD+" ]");
-									}
-										break;}
-				case 'p':		{String query = "Select * from Patient";
-									rs = st.executeQuery(query);
-									System.out.println("");
-									while(rs.next()){
-										String name = rs.getString("Name");
-										String ssn = rs.getString("SSN");
-										String BD = rs.getString("BirthDate");
-										int x = Integer.parseInt(ssn);
-										if(  x == ssnInput)
-											System.out.println("Patient's name [ "+ name+" ] .. His SSN [ "+ssn+" ] .. His BirthDate [ "+BD+" ]");
-									}
-										break;}
-				}
-			
-			
-		}catch(Exception ex){
-			System.out.println("Error :"+ ex);
-		}
-		
-	}
-	public void delete(String kind,Object o){
+	public void search(String kind,Object o){
 		switch(kind){
 		case "Branch":
 			Branch b=(Branch)o;
@@ -306,7 +262,10 @@ public class DBConnect {
 				String query ="DELETE FROM `Hospital`.`Branch` WHERE Bnumber="+b.getBnumber()+" and Hid="+b.getHid()+";";
 				st.executeUpdate(query);
 			}catch(Exception e){
-				System.out.println(e.getMessage());
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();			    	
 			}
 			break;
 		case "Department":
@@ -315,8 +274,10 @@ public class DBConnect {
 				String query ="DELETE FROM `Hospital`.`Department` WHERE Dnumber="+dep.getDnumber()+";";
 				st.executeUpdate(query);
 			}catch(Exception e){
-				System.out.println(e.getMessage());
-			}
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
 			break;
 		case "Doctor":
 			Doctor doc=(Doctor)o;
@@ -324,8 +285,10 @@ public class DBConnect {
 				String query ="DELETE FROM `Hospital`.`Doctor` WHERE SSN="+doc.gerSsn()+";";
 				st.executeUpdate(query);
 			}catch(Exception e){
-				System.out.println(e.getMessage());
-			}
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
 			break;
 		case "Paitient":
 			Paitient p=(Paitient)o;
@@ -333,8 +296,10 @@ public class DBConnect {
 				String query ="DELETE FROM `Hospital`.`Paitient` WHERE Pid="+p.getPid()+";";
 				st.executeUpdate(query);
 			}catch(Exception e){
-				System.out.println(e.getMessage());
-			}
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
 			break;
 		case "Appointment":
 			Appointment a=(Appointment)o;
@@ -342,12 +307,140 @@ public class DBConnect {
 				String query ="DELETE FROM `Hospital`.`Appointment` WHERE DSSN="+a.getSsn()+" and Pid="+a.getPid()+" and Appno="+a.getAppno()+";";
 				st.executeUpdate(query);
 			}catch(Exception e){
-				System.out.println(e.getMessage());
-			}
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
 			break;
 		default:
 			System.out.println("Error unknown kind");
+		}
+		
+		
 	}
+	public Object[] delete(String kind,Object o){
+		switch(kind){
+		case "Branch":
+			Branch b=(Branch)o;
+			try{
+				String query ="Select * FROM Branch WHERE Bnumber="+b.getBnumber()+" and Hid="+b.getHid()+";";
+				rs=st.executeQuery(query);
+				int size=0;
+				while(rs.next()){
+					size++;
+				}
+				
+				Object res[]=new Object[size];
+				rs=st.executeQuery(query);
+				int i=0;
+				while(rs.next()){
+					res[i++]=new Branch(rs.getInt("Bnumber"),rs.getInt("Hid"),rs.getString("Location"));
+				}
+			}catch(Exception e){
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();			    	
+			}
+			break;
+		case "Department":
+			Department dep=(Department)o;
+			
+			try{
+				String query ="Select * FROM Department WHERE Dnumber="+dep.getDnumber()+" and Hid="+dep.getHid()+" ;";
+				rs=st.executeQuery(query);
+				int size=0;
+				while(rs.next()){
+					size++;
+				}
+				
+				Object res[]=new Object[size];
+				rs=st.executeQuery(query);
+				int i=0;
+				while(rs.next()){
+					res[i++]=new Department(rs.getInt("Bnumber"),rs.getString("Dname"),rs.getInt("Dnumber"),rs.getInt("Hid"));
+				}
+			}catch(Exception e){
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();			
+				}
+			
+			break;
+		case "Doctor":
+			Doctor doc=(Doctor)o;
+			
+			try{
+				String query ="Select * FROM Doctor WHERE SSN="+doc.gerSsn()+";";
+				rs=st.executeQuery(query);
+				int size=0;
+				while(rs.next()){
+					size++;
+				}
+				
+				Object res[]=new Object[size];
+				rs=st.executeQuery(query);
+				int i=0;
+				while(rs.next()){
+					res[i++]=new Doctor(rs.getInt("SSN"),rs.getString("Fname"),rs.getString("Lname"),rs.getString("sex"),rs.getInt("Dnumber"));
+				}
+			}catch(Exception e){
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();			
+				}
+			
+			break;
+		case "Paitient":
+			Paitient p=(Paitient)o;
+			try{
+				String query ="Select * FROM Paitient WHERE Pid="+p.getPid()+";";
+				rs=st.executeQuery(query);
+				int size=0;
+				while(rs.next()){
+					size++;
+				}
+				
+				Object res[]=new Object[size];
+				rs=st.executeQuery(query);
+				int i=0;
+				while(rs.next()){
+					res[i++]=new Paitient(rs.getInt("Pid"),rs.getString("Fname"), rs.getString("Lname"), rs.getString("sex"), rs.getInt("SSN"));
+				}
+			}catch(Exception e){
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
+			break;
+		case "Appointment":
+			Appointment a=(Appointment)o;
+			try{
+				String query ="Select * FROM Appointment WHERE DSSN="+a.getSsn()+" and Pid="+a.getPid()+" and Appno="+a.getAppno()+";";
+				rs=st.executeQuery(query);
+				int size=0;
+				while(rs.next()){
+					size++;
+				}
+				
+				Object res[]=new Object[size];
+				rs=st.executeQuery(query);
+				int i=0;
+				while(rs.next()){
+					res[i++]=new Appointment(rs.getInt("Dssn"), rs.getInt("Pid"), rs.getInt("Appno"), rs.getString("time"), rs.getString("date"), rs.getDouble("price"));
+				}
+			}catch(Exception e){
+				JOptionPane pane = new JOptionPane();
+		    	pane.setMessage(e.getMessage());
+				JDialog dialog = pane.createDialog( "Problem");
+				dialog.show();				}
+			break;
+		default:
+			System.out.println("Error unknown kind");
+		}
+		return null;
 	}
 	
 	public boolean insert(String kind,Object o){
@@ -362,11 +455,10 @@ public class DBConnect {
 					st.executeUpdate(query);
 					System.out.println("Done");
 			    }catch(Exception ex){
-			    	 JOptionPane pane = new JOptionPane();
-					   pane.setMessage(ex.getMessage());
-					   JDialog dialog = pane.createDialog( "Problem");
-					   dialog.show();
-			    	System.out.println("Error :"+ ex);
+			    	JOptionPane pane = new JOptionPane();
+			    	pane.setMessage(ex.getMessage());
+					JDialog dialog = pane.createDialog( "Problem");
+					dialog.show();
 			    	return false;
 			    	
 			    }
@@ -382,8 +474,11 @@ public class DBConnect {
 					st.executeUpdate(query);
 
 			    }catch(Exception ex){
-			    	System.out.println("Error :"+ ex);
-			    	return false;
+			    	JOptionPane pane = new JOptionPane();
+			    	pane.setMessage(ex.getMessage());
+					JDialog dialog = pane.createDialog( "Problem");
+					dialog.show();			    	
+					return false;
 			    	
 			    }
 				return true;
@@ -398,8 +493,11 @@ public class DBConnect {
 					st.executeUpdate(query);
 
 			    }catch(Exception ex){
-			    	System.out.println("Error :"+ ex);
-			    	return false;
+			    	JOptionPane pane = new JOptionPane();
+			    	pane.setMessage(ex.getMessage());
+					JDialog dialog = pane.createDialog( "Problem");
+					dialog.show();			    	
+					return false;
 			    	
 			    }
 				return true;
@@ -413,8 +511,11 @@ public class DBConnect {
 					st.executeUpdate(query);
 
 			    }catch(Exception ex){
-			    	System.out.println("Error :"+ ex);
-			    	return false;
+			    	JOptionPane pane = new JOptionPane();
+			    	pane.setMessage(ex.getMessage());
+					JDialog dialog = pane.createDialog( "Problem");
+					dialog.show();			    	
+					return false;
 			    	
 			    }
 				return true;
@@ -428,8 +529,11 @@ public class DBConnect {
 					st.executeUpdate(query);
 
 			    }catch(Exception ex){
-			    	System.out.println("Error :"+ ex);
-			    	return false;
+			    	JOptionPane pane = new JOptionPane();
+			    	pane.setMessage(ex.getMessage());
+					JDialog dialog = pane.createDialog( "Problem");
+					dialog.show();			    	
+					return false;
 			    	
 			    }
 				return true;
