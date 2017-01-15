@@ -1,6 +1,9 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 	Label x =20
 	Text field x = 138;
 */
-public class Inserts {
+public class insert {
 	public JFrame f1;
 	private JFrame f2;
 	private JFrame f3;
@@ -30,7 +33,7 @@ public class Inserts {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inserts window = new Inserts();
+					insert window = new insert();
 					window.f1.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +42,7 @@ public class Inserts {
 		});
 	}
 
-	public Inserts() {
+	public insert() {
 		
 		magic();
 		
@@ -89,10 +92,39 @@ public class Inserts {
 		branchP.add(tf_bn);
 		tf_bn.setColumns(10);
 		
+		// MAKING THE FIELD ONLY TAKES NNUMBERs
+		tf_bn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(! ( Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+													
+					JOptionPane.showMessageDialog(null,"Only digits allowed");
+					e.consume();
+				}
+			}
+		});				
+		// ******************* End of FIELD *****************
+		
+		
 		JTextField tf_bc= new JTextField();
 		tf_bc.setBounds(271, 117, 130, 26);
 		branchP.add(tf_bc);
 		tf_bc.setColumns(10);
+		
+		// MAKING THE FIELD ONLY TAKES LETTERS
+		tf_bc.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char c = e.getKeyChar();
+					if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+											
+						JOptionPane.showMessageDialog(null,"Only letters allowed");
+						e.consume();
+					}
+				}
+		});				
+		// ******************* End of FIELD ***************** 
 		
 		JLabel jl_bn = new JLabel("Branch Number");
 		jl_bn.setBounds(286, 78, 103, 16);
@@ -109,22 +141,35 @@ public class Inserts {
 		branchP.add(btnInsert);
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean empty = false;
+				
 				String bn=tf_bc.getText();
+				if(bn.isEmpty())
+					empty = true;
 				int bnum=Integer.parseInt(bn);
 				
 				String loc=tf_bn.getText();
+				if(loc.isEmpty())
+					empty = true;
 				
-				Branch brO=new Branch(bnum,hid,loc);
-				
-				boolean flag=DBC.insert("Branch",brO);
-				if(flag){
-				  JOptionPane pane = new JOptionPane();
-				  pane.setMessage("Sucssefuly insertd");
-			      JDialog dialog = pane.createDialog( "Notfication");
-				  dialog.show();
-				  f1.hide();
+				if(!empty){
+					
+					Branch brO=new Branch(bnum,hid,loc);
+					boolean flag=DBC.insert("Branch",brO);
+					if(flag){
+					  JOptionPane pane = new JOptionPane();
+					  pane.setMessage("Sucssefuly insertd");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+					  f1.hide();
+					}
 				}
-				
+				else{
+					JOptionPane pane = new JOptionPane();
+					  pane.setMessage("One or more elements are empty or it's already in database");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+				}
 			}
 		});
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */		
@@ -162,11 +207,40 @@ public class Inserts {
 		departmentP.add(jt_dn);
 		jt_dn.setColumns(10);
 		
+		// MAKING THE FIELD ONLY TAKES NUMBERS
+		jt_dn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(! ( Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+					
+					JOptionPane.showMessageDialog(null,"Only numbers allowed");
+					e.consume();
+				}
+			}
+		});
+		
+		// ******************* End of FIELD ***************** 
+		
 		
 		JLabel jl_dnm = new JLabel("Department name");
 		jl_dnm.setBounds(20, 72, 141, 16);
 		departmentP.add(jl_dnm);
 		
+		// MAKING THE FIELD ONLY TAKES LETTERS
+			jl_dnm.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+							
+							JOptionPane.showMessageDialog(null,"Only letters allowed");
+							e.consume();
+						}
+					}
+				});
+				
+				// ******************* End of FIELD ***************** 
 		
 		JTextField jt_dnm = new JTextField();
 		jt_dnm.setBounds(170, 120, 130, 26);
@@ -194,11 +268,18 @@ public class Inserts {
 		
 		jb_dep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean empty = false;
+				
 				String dn=jt_dnm.getText();
+				if(dn.isEmpty())
+					empty=true;
 				int dnum=Integer.parseInt(dn);
 				
 				String depN=jt_dn.getText();
+				if(depN.isEmpty())
+					empty=true;
 				
+				if(!empty){
 				int bnum=arrBn[bnums.getSelectedIndex()];
 				Department depO=new Department(dnum,depN,bnum,hid);
 				
@@ -210,6 +291,14 @@ public class Inserts {
 					  dialog.show();
 					  f2.hide();
 					}
+				}
+				else{
+					JOptionPane pane = new JOptionPane();
+					  pane.setMessage("One or more elements are empty");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+					
+				}
 				
 			}
 		});
@@ -246,6 +335,20 @@ public class Inserts {
 		jt_fn.setBounds(138, 60, 149, 26);
 		doctorP.add(jt_fn);
 		jt_fn.setColumns(10);
+		// MAKING THE FIELD ONLY TAKES LETTERS
+				jt_fn.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyTyped(KeyEvent e) {
+							char c = e.getKeyChar();
+							if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+									
+								JOptionPane.showMessageDialog(null,"Only letters allowed");
+								e.consume();
+							}
+						}
+				});
+						
+						// ******************* End of FIELD ***************** 
 		
 		JLabel jl_ln = new JLabel("Last Name");
 		jl_ln.setToolTipText("");
@@ -256,6 +359,23 @@ public class Inserts {
 		jt_ln.setColumns(10);
 		jt_ln.setBounds(138, 98, 149, 26);
 		doctorP.add(jt_ln);
+		
+		// MAKING THE FIELD ONLY TAKES LETTERS
+		jt_ln.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char c = e.getKeyChar();
+					if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+							
+						JOptionPane.showMessageDialog(null,"Only letters allowed");
+						e.consume();
+					}
+				}
+		});
+				
+				// ******************* End of FIELD ***************** 
+		
+		
 		
 		JLabel jl_s = new JLabel("Sex");
 		jl_s.setBounds(20, 163, 30, 16);
@@ -282,6 +402,21 @@ public class Inserts {
 		jt_ssn.setColumns(10);
 		jt_ssn.setBounds(138, 129, 149, 26);
 		doctorP.add(jt_ssn);
+		
+		// MAKING THE FIELD ONLY TAKES NUMBERS
+			jt_ssn.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if(! ( Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+							
+							JOptionPane.showMessageDialog(null,"Only numbers allowed");
+							e.consume();
+						}
+					}
+				});
+				
+				// ******************* End of FIELD ***************** 
 		
 		JLabel jl_dno = new JLabel("Branch number");
 		jl_dno.setToolTipText("");
@@ -334,25 +469,47 @@ public class Inserts {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boolean empty = false;
+				
+				if(jt_ssn.getText().isEmpty())
+					empty=true;
 				int dssn=Integer.parseInt(jt_ssn.getText());
+				
 				String d_Fname=jt_fn.getText();
+				if(d_Fname.isEmpty())
+					empty=true;
+				
 				String d_Lname=jt_ln.getText();
+				if(d_Lname.isEmpty())
+					empty=true;
+				
 				String d_sex="";
 				if(jr_m.isSelected())
 					d_sex="M";
-				if(jr_f.isSelected())
+				else if(jr_f.isSelected())
 					d_sex="F";
+				else
+					empty = true;
+				
 				int d_Bn=Integer.parseInt(jc_dnn.getSelectedItem().toString());
 				
-				Doctor doc=new Doctor(dssn,d_Fname,d_Lname,d_sex,d_Bn);
-				
-				boolean flag=DBC.insert("Doctor", doc);
-				if(flag){
-					  JOptionPane pane = new JOptionPane();
-					  pane.setMessage("Sucssefuly insertd");
+				if(!empty){
+					
+					Doctor doc=new Doctor(dssn,d_Fname,d_Lname,d_sex,d_Bn);	
+					boolean flag=DBC.insert("Doctor", doc);
+					if(flag){
+						  JOptionPane pane = new JOptionPane();
+						  pane.setMessage("Sucssefuly insertd");
+					      JDialog dialog = pane.createDialog( "Notfication");
+						  dialog.show();
+						  f3.hide();
+					}
+				}
+				else{
+					JOptionPane pane = new JOptionPane();
+					  pane.setMessage("One or more elements are empty");
 				      JDialog dialog = pane.createDialog( "Notfication");
 					  dialog.show();
-					  f3.hide();
 				}
 				
 			}
@@ -381,37 +538,93 @@ public class Inserts {
 		comboBox4.setSelectedIndex(3);
 		paitientP.add(comboBox4);
 		
-		JTextField textField_5 = new JTextField();
-		textField_5.setBounds(138, 60, 130, 26);
-		paitientP.add(textField_5);
-		textField_5.setColumns(10);
+		JTextField firstn = new JTextField();
+		firstn.setBounds(138, 60, 130, 26);
+		paitientP.add(firstn);
+		firstn.setColumns(10);
+		
+		// MAKING THE FIELD ONLY TAKES LETTERS
+		firstn.addKeyListener(new KeyAdapter() {
+						@Override
+						public void keyTyped(KeyEvent e) {
+							char c = e.getKeyChar();
+							if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+									
+								JOptionPane.showMessageDialog(null,"Only letters allowed");
+								e.consume();
+							}
+						}
+				});
+						
+						// ******************* End of FIELD ***************** 
 		
 		JLabel jl_ffn = new JLabel("First name");
 		jl_ffn.setBounds(20, 65, 86, 16);
 		paitientP.add(jl_ffn);
 		
-		JTextField textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(138, 98, 130, 26);
-		paitientP.add(textField_6);
+		JTextField lastn = new JTextField();
+		lastn.setColumns(10);
+		lastn.setBounds(138, 98, 130, 26);
+		paitientP.add(lastn);
+		
+		lastn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+						
+					JOptionPane.showMessageDialog(null,"Only letters allowed");
+					e.consume();
+				}
+			}
+		});
+			
+			// ******************* End of FIELD ***************** 
+		
 		
 		JLabel lblLastName_1 = new JLabel("Last name");
 		lblLastName_1.setBounds(20, 103, 86, 16);
 		paitientP.add(lblLastName_1);
 		
-		JTextField textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(138, 136, 130, 26);
-		paitientP.add(textField_7);
+		JTextField id = new JTextField();
+		id.setColumns(10);
+		id.setBounds(138, 136, 130, 26);
+		paitientP.add(id);
+		
+		// MAKING THE FIELD ONLY TAKES NUMBERS
+					id.addKeyListener(new KeyAdapter() {
+							@Override
+							public void keyTyped(KeyEvent e) {
+								char c = e.getKeyChar();
+								if(! ( Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){						
+									JOptionPane.showMessageDialog(null,"Only numbers allowed");
+									e.consume();
+								}
+							}
+						});		
+					// ******************* End of FIELD ***************** 
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(20, 141, 86, 16);
 		paitientP.add(lblId);
 		
-		JTextField textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(138, 169, 130, 26);
-		paitientP.add(textField_8);
+		JTextField ssn = new JTextField();
+		ssn.setColumns(10);
+		ssn.setBounds(138, 169, 130, 26);
+		paitientP.add(ssn);
+		
+		// MAKING THE FIELD ONLY TAKES NUMBERS
+			ssn.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyTyped(KeyEvent e) {
+						char c = e.getKeyChar();
+						if(! ( Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){						
+							JOptionPane.showMessageDialog(null,"Only numbers allowed");
+							e.consume();
+						}
+					}
+				});		
+			// ******************* End of FIELD ***************** 
 		
 		JLabel lblSsn_1 = new JLabel("SSN");
 		lblSsn_1.setBounds(20, 174, 86, 16);
@@ -432,9 +645,61 @@ public class Inserts {
 		ButtonGroup btnGroup1 = new ButtonGroup();
 		btnGroup1.add(rdbtnM);
 		btnGroup1.add(rdbtnF);
+		
 		JButton btnInsert_1 = new JButton("Insert");
 		btnInsert_1.setBounds(151, 243, 100, 29);
 		paitientP.add(btnInsert_1);
+		
+		btnInsert_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean empty = false;
+				
+				if(id.getText().isEmpty())
+					empty=true;
+				int pid=Integer.parseInt(id.getText());
+				
+				if(ssn.getText().isEmpty())
+					empty=true;
+				int pssn =Integer.parseInt(ssn.getText());
+				
+				
+				String fname=firstn.getText();
+				if(fname.isEmpty())
+					empty=true;
+				
+				String lname=lastn.getText();
+				if(lname.isEmpty())
+					empty=true;
+				
+				String p_sex="";
+				if(rdbtnM.isSelected())
+					p_sex="M";
+				else if(rdbtnF.isSelected())
+					p_sex="F";
+				else
+					empty = true;
+				
+				if(!empty){
+					Paitient p =new Paitient(pid,fname,lname,p_sex,pssn);
+					
+					boolean flag=DBC.insert("Paitient", p);
+					if(flag){
+						  JOptionPane pane = new JOptionPane();
+						  pane.setMessage("Sucssefuly insertd");
+					      JDialog dialog = pane.createDialog( "Notfication");
+						  dialog.show();
+						  f4.hide();
+					}
+				}
+				else{
+					JOptionPane pane = new JOptionPane();
+					  pane.setMessage("One or more elements are empty");
+				      JDialog dialog = pane.createDialog( "Notfication");
+					  dialog.show();
+				}
+				
+			}
+		});
 		
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
@@ -468,13 +733,48 @@ public class Inserts {
 		lblDoctorssn.setBounds(20, 85, 80, 16);
 		appoinP.add(lblDoctorssn);
 		
+		//*************** ID combobox *****************
 		JComboBox comboBox_ID = new JComboBox();
 		comboBox_ID.setBounds(138, 48, 119, 27);
 		appoinP.add(comboBox_ID);
 		
+		LinkedList<Integer> Ids = DBC.getPaitientId();
+		if(!Ids.empty()){
+			Ids.findFirst();
+			while(!Ids.last()){
+				comboBox_ID.addItem(Ids.retrieve());
+				Ids.findNext();
+			}
+			comboBox_ID.addItem(Ids.retrieve());
+		}
+		else{
+			comboBox_ID.addItem("Empty");
+		}
+		
+		
+		
+		
+		
+		//*************** SSN combobox *****************
 		JComboBox comboBox_SSN = new JComboBox();
 		comboBox_SSN.setBounds(138, 81, 119, 27);
 		appoinP.add(comboBox_SSN);
+		
+		LinkedList<Integer> SSNs = DBC.getDoctorSsn();
+		if(!SSNs.empty()){
+			SSNs.findFirst();
+			while(!SSNs.last()){
+				comboBox_SSN.addItem(SSNs.retrieve());
+				SSNs.findNext();
+			}
+			comboBox_SSN.addItem(SSNs.retrieve());
+		}
+		else{
+			comboBox_SSN.addItem("Empty");
+		}
+		
+		
+		
 		
 		JLabel lblDate = new JLabel("Date");
 		lblDate.setBounds(20, 120, 80, 16);
@@ -547,6 +847,42 @@ public class Inserts {
 		JButton btnInsert_2 = new JButton("Insert");
 		btnInsert_2.setBounds(163, 246, 117, 29);
 		appoinP.add(btnInsert_2);
+		
+		btnInsert_2.addActionListener(new ActionListener(){
+
+			
+			// ***************** BUTTON INSERT ACTION *******************	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int pId = (int) comboBox_ID.getSelectedItem();
+					int dSsn = (int) comboBox_SSN.getSelectedItem();
+					
+					int year = (int) comboBox_Y.getSelectedItem();
+					int month = (int) comboBox_M.getSelectedItem();
+					int day = (int) comboBox_D.getSelectedItem();
+					String date = year+"/"+month+"/"+day;
+					
+					int hour = (int) comboBox_H.getSelectedItem();
+					int Min = (int) comboBox_Min.getSelectedItem();
+					String time = hour+":"+Min;
+					
+					int appno= year+month+day*hour+Min%199;
+					double price = 100;
+					
+					Appointment app = new Appointment(dSsn, pId, appno,time,date, price );
+					boolean flag=DBC.insert("Appointment",app);
+					if(flag){
+						  JOptionPane pane = new JOptionPane();
+						  pane.setMessage("Sucssefuly insertd");
+					      JDialog dialog = pane.createDialog( "Notfication");
+						  dialog.show();
+						  f5.hide();
+					}
+					
+					
+				}
+				
+			});
 		
 		comboBox1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
