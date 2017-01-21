@@ -68,7 +68,7 @@ public class insert {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Branch			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */	
 		f1 = new JFrame();
 		f1.setBounds(600, 100, 450, 300);
-		f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f1.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		branchP = new JPanel();
 		branchP.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -88,7 +88,8 @@ public class insert {
 		branchP.add(comboBox1);
 			
 		JTextField tf_bn= new JTextField();
-		tf_bn.setBounds(30, 117, 130, 26);
+		//271, 117, 130, 26
+		tf_bn.setBounds(271, 117, 130, 26);
 		branchP.add(tf_bn);
 		tf_bn.setColumns(10);
 		
@@ -108,7 +109,7 @@ public class insert {
 		
 		
 		JTextField tf_bc= new JTextField();
-		tf_bc.setBounds(271, 117, 130, 26);
+		tf_bc.setBounds(30, 117, 130, 26);
 		branchP.add(tf_bc);
 		tf_bc.setColumns(10);
 		
@@ -143,12 +144,15 @@ public class insert {
 			public void actionPerformed(ActionEvent e) {
 				boolean empty = false;
 				
-				String bn=tf_bc.getText();
-				if(bn.isEmpty())
-					empty = true;
+				String bn=tf_bn.getText();
 				int bnum=Integer.parseInt(bn);
+				if(bn.isEmpty()){
+					empty = true;
 				
-				String loc=tf_bn.getText();
+				}
+					
+				
+				String loc=tf_bc.getText();
 				if(loc.isEmpty())
 					empty = true;
 				
@@ -178,7 +182,7 @@ public class insert {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Department			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f2 = new JFrame();
 		f2.setBounds(600, 100, 450, 300);
-		f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		departmentP = new JPanel();
 		departmentP.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -203,10 +207,10 @@ public class insert {
 		
 		
 		JTextField jt_dn = new JTextField();
-		jt_dn.setBounds(170, 67, 130, 26);
+		
+		jt_dn.setBounds(170, 120, 130, 26);
 		departmentP.add(jt_dn);
 		jt_dn.setColumns(10);
-		
 		// MAKING THE FIELD ONLY TAKES NUMBERS
 		jt_dn.addKeyListener(new KeyAdapter() {
 			@Override
@@ -227,25 +231,27 @@ public class insert {
 		jl_dnm.setBounds(20, 72, 141, 16);
 		departmentP.add(jl_dnm);
 		
-		// MAKING THE FIELD ONLY TAKES LETTERS
-			jl_dnm.addKeyListener(new KeyAdapter() {
-					@Override
-					public void keyTyped(KeyEvent e) {
-						char c = e.getKeyChar();
-						if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
-							
-							JOptionPane.showMessageDialog(null,"Only letters allowed");
-							e.consume();
-						}
-					}
-				});
-				
-				// ******************* End of FIELD ***************** 
 		
+		//170, 120, 130, 26
 		JTextField jt_dnm = new JTextField();
-		jt_dnm.setBounds(170, 120, 130, 26);
+		jt_dnm.setBounds(170, 67, 130, 26);
 		departmentP.add(jt_dnm);
 		jt_dnm.setColumns(10);
+		
+		// MAKING THE FIELD ONLY TAKES LETTERS
+					jt_dnm.addKeyListener(new KeyAdapter() {
+							@Override
+							public void keyTyped(KeyEvent e) {
+								char c = e.getKeyChar();
+								if(! ( Character.isLetter(c) || (c == KeyEvent.VK_BACK_SPACE) || ( c == KeyEvent.VK_DELETE) )){
+									
+									JOptionPane.showMessageDialog(null,"Only letters allowed");
+									e.consume();
+								}
+							}
+						});
+						
+						// ******************* End of FIELD ***************** 
 		
 		JLabel jl_bnumb = new JLabel("Branch number");
 		jl_bnumb.setBounds(20, 176, 141, 16);
@@ -273,15 +279,24 @@ public class insert {
 				String dn=jt_dnm.getText();
 				if(dn.isEmpty())
 					empty=true;
-				int dnum=Integer.parseInt(dn);
+				
 				
 				String depN=jt_dn.getText();
-				if(depN.isEmpty())
+				int dnum=-1;
+				if(depN.isEmpty()){
 					empty=true;
+					//dnum=Integer.parseInt(depN);
+				}
+				else{
+					dnum=Integer.parseInt(depN);
+				}
 				
+				if(dnum ==-1){
+					empty=true;
+				}
 				if(!empty){
 				int bnum=arrBn[bnums.getSelectedIndex()];
-				Department depO=new Department(dnum,depN,bnum,hid);
+				Department depO=new Department(dnum,dn,bnum,hid);
 				
 				boolean flag=DBC.insert("Department", depO);
 				if(flag){
@@ -308,7 +323,7 @@ public class insert {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Doctor			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f3 = new JFrame();
 		f3.setBounds(600, 100, 450, 300);
-		f3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f3.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		doctorP = new JPanel();
 		doctorP.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -471,9 +486,11 @@ public class insert {
 			public void actionPerformed(ActionEvent e) {
 				boolean empty = false;
 				
+				int dssn=-1;
 				if(jt_ssn.getText().isEmpty())
 					empty=true;
-				int dssn=Integer.parseInt(jt_ssn.getText());
+				else
+					dssn=Integer.parseInt(jt_ssn.getText());
 				
 				String d_Fname=jt_fn.getText();
 				if(d_Fname.isEmpty())
@@ -490,8 +507,17 @@ public class insert {
 					d_sex="F";
 				else
 					empty = true;
-				
-				int d_Bn=Integer.parseInt(jc_dnn.getSelectedItem().toString());
+				int d_Bn=-1;
+				if(jc_dnn.getSelectedIndex() != -1)
+					if(!jc_dnn.getSelectedItem().toString().equals("Empty"))
+						d_Bn=Integer.parseInt(jc_dnn.getSelectedItem().toString());
+				if(d_Bn == -1)
+					empty=true;
+				if(dssn==-1)
+					empty=true;
+				if(jc_dnn.getSelectedIndex() != -1)
+					if(jc_dnn.getSelectedItem().toString().equals("Empty") || jc_brnn.getSelectedIndex()==0)
+						empty=true;
 				
 				if(!empty){
 					
@@ -520,7 +546,7 @@ public class insert {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Patient			 	 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f4 = new JFrame();
 		f4.setBounds(600, 100, 450, 300);
-		f4.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f4.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		paitientP = new JPanel();
 		paitientP.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -653,15 +679,20 @@ public class insert {
 		btnInsert_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean empty = false;
-				
+				int pid=-1;
 				if(id.getText().isEmpty())
 					empty=true;
-				int pid=Integer.parseInt(id.getText());
+				else
+					pid=Integer.parseInt(id.getText());
 				
+				int pssn=-1;
 				if(ssn.getText().isEmpty())
 					empty=true;
-				int pssn =Integer.parseInt(ssn.getText());
+				else	
+					pssn=Integer.parseInt(ssn.getText());
 				
+				if(pssn == -1 || pid ==-1)
+					empty=true;
 				
 				String fname=firstn.getText();
 				if(fname.isEmpty())
@@ -707,7 +738,7 @@ public class insert {
 		/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$			Appointment			 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 		f5 = new JFrame();
 		f5.setBounds(600, 100, 450, 300);
-		f5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f5.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		appoinP = new JPanel();
 		appoinP.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -866,7 +897,8 @@ public class insert {
 					int Min = (int) comboBox_Min.getSelectedItem();
 					String time = hour+":"+Min;
 					
-					int appno= year+month+day*hour+Min%199;
+					Random r=new Random();
+					int appno= year+month+day*hour+Min%199*r.nextInt(99999);
 					double price = 100;
 					
 					Appointment app = new Appointment(dSsn, pId, appno,time,date, price );
